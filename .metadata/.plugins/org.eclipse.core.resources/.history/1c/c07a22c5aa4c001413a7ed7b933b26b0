@@ -1,0 +1,26 @@
+package oop;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Oop {
+
+	public static void main(String[] args) {
+
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		ArrayList<String> list = new ArrayList<String>();
+		list.add(5);
+		list.add(1);
+		list.add(3);
+		list.sort(null);
+		System.out.println(list);
+		HashMap<Integer, String> dict = new HashMap<Integer,String>();
+		dict.put(n, "qwe");
+		System.out.println(n);
+		System.out.println(dict.get(n));
+		input.close();
+	}
+
+}

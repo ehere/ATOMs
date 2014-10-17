@@ -1,0 +1,7 @@
+package com.example.myapp;
+
+import android.widget.TextView;
+
+public class TypefacedTextView extends TextView {
+
+}

@@ -1,0 +1,11 @@
+package oop;
+
+public class Oop {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int a[] = new int[4];
+		System.out.print(a.length);
+	}
+
+}

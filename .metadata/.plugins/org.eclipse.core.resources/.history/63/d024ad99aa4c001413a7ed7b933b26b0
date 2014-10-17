@@ -1,0 +1,11 @@
+package oop;
+
+
+public class Oop {
+
+	public static void main(String[] args) {
+
+		System.out.print(Math.pow(5, 3));
+	}
+
+}

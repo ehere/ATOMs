@@ -1,0 +1,22 @@
+package oop;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Oop {
+
+	public static void main(String[] args) {
+
+		//Scanner input = new Scanner(System.in);
+		//int n = input.nextInt();
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("asd");
+		list.add("qwe");
+		HashMap<new Int, String> dict = new HashMap<new Int,String>();
+		dict.
+		System.out.print(list.indexOf("qwe"));
+		//input.close();
+	}
+
+}
