@@ -39,8 +39,6 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
                 	String token = auth.getToken();
                     String sender = messages[0].getOriginatingAddress();
                     String message = messages[0].getMessageBody();
-                    String relay_station = messages[0].getServiceCenterAddress();
-                    Toast.makeText(context, relay_station, 7000).show();
 
                     
                     ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
