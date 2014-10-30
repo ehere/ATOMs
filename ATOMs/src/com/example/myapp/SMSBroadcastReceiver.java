@@ -47,6 +47,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
                     params.add(new BasicNameValuePair("message", message));
                 	HttpRequest request = new HttpRequest("https://www.diyby.me/android-connect/sms_receiver.php");
                 	JSONObject result = request.get(params);
+                	
             		if(result == null) //no internet connection.
             		{
             			Toast.makeText(context, "No Internet Connection.", 7000).show();

@@ -26,6 +26,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,10 +57,30 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		setupActionBar();
+		new Thread() {
+			public void run() {					
+				try{			
+					Authenticate auth = new Authenticate(getApplicationContext());
+					if(!auth.isConnect())
+					{
+						Toast.makeText(getApplicationContext(), "No Internet Connection.", 7000).show();
+					}
+					else if(auth.isLogin())
+					{
+						Intent newActivity = new Intent(LoginActivity.this,MainActivity.class);
+						startActivity(newActivity);
+						overridePendingTransition(R.animator.left_in, R.animator.right_out);
+						Thread.sleep(1000);
+						finish();
+					}
+				}catch(Exception e){
+				}
+			}
+		}.start();
 		title = (TextView)findViewById(R.id.textView1);
         Typeface AtomsFont = Typeface.createFromAsset(getAssets(), "fonts/univox.ttf");
         title.setTypeface(AtomsFont);
-        title.setTextSize(30);
+        title.setTextSize(20);
 
 		// Set up the login form.
 		mEmailView = (AutoCompleteTextView) findViewById(R.id.username);
@@ -298,9 +320,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 			}
 			else if(auth.isLogin())
 			{
-				finish();
 				Intent newActivity = new Intent(LoginActivity.this,MainActivity.class);
 				startActivity(newActivity);
+				overridePendingTransition(R.animator.left_in, R.animator.right_out);
+				finish();
 			} 
 			else 
 			{

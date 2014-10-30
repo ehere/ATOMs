@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="isEmpty" key="selection"/>
+		<item value="UserLoginTask" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="UserLoginTask"/>
+			<item value="isibil"/>
+			<item value="isibill"/>
+			<item value="visibill"/>
+			<item value="mProgressView"/>
 			<item value="isEmpty"/>
 			<item value="error_field_required"/>
 			<item value="error_incorrect_password"/>
-			<item value="UserLoginTask"/>
-			<item value="mProgressView"/>
-			<item value="ProfileQuery"/>
-			<item value="mAuthTask"/>
-			<item value="action_settings"/>
 		</list>
 		<list key="replacehistory">
 		</list>

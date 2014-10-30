@@ -6,36 +6,69 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Toast;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
 
 @SuppressLint("ShowToast")
 public class MainActivity extends Activity {
-	private TextView title; 
 	private View mProgressView;
 	private Background mAuthTask;
+	private Button btnSMS, btnOrder, btnTransaction;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_main);
-		title = (TextView)findViewById(R.id.textView1);
-        Typeface AtomsFont = Typeface.createFromAsset(getAssets(), "fonts/univox.ttf");
-        title.setTypeface(AtomsFont);
-        title.setTextSize(30);
-        mProgressView = findViewById(R.id.login_progress);
-		
+        mProgressView = findViewById(R.id.login_progress);   
         mAuthTask = new Background();
         mAuthTask.execute((Void) null);
-
         
+        btnSMS = (Button) findViewById(R.id.button1);
+        btnOrder = (Button) findViewById(R.id.button2);
+        btnTransaction = (Button) findViewById(R.id.button3);
+        
+        btnSMS.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        btnSMS.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
+				startActivity(newActivity);
+				overridePendingTransition(R.animator.right_in, R.animator.left_out);
+				finish();
+			}
+		});
+        
+        btnOrder.getBackground().setColorFilter(Color.parseColor("#00D0FF"), PorterDuff.Mode.MULTIPLY);
+        btnOrder.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
+				startActivity(newActivity);
+				overridePendingTransition(R.animator.right_in, R.animator.left_out);
+				finish();
+			}
+		});
+
+        btnTransaction.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
+        btnTransaction.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
+				startActivity(newActivity);
+				overridePendingTransition(R.animator.right_in, R.animator.left_out);
+				finish();
+			}
+		});
 
 	}
 
@@ -65,10 +98,11 @@ public class MainActivity extends Activity {
 				return false;
 			}
 			else if(auth.logout())
-			{
-				finish();
+			{	
 				Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
 				startActivity(newActivity);
+				overridePendingTransition(R.animator.right_in, R.animator.left_out);
+				finish();
 				return true;
 			}
 			else
@@ -86,7 +120,7 @@ public class MainActivity extends Activity {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
 			int shortAnimTime = getResources().getInteger(
 					android.R.integer.config_shortAnimTime);
-
+			
 
 			mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
 			mProgressView.animate().setDuration(shortAnimTime)
@@ -130,15 +164,23 @@ public class MainActivity extends Activity {
 			mAuthTask = null;
 			showProgress(false);
 			if(!auth.isConnect())
+			{
 				Toast.makeText(getApplicationContext(), "No Internet Connection.", 7000).show();
+			}
 			else if(auth.isLogin())
+			{
 				Toast.makeText(getApplicationContext(), "Login Success", 7000).show();
+				btnSMS.setVisibility(View.VISIBLE);
+				btnOrder.setVisibility(View.VISIBLE);
+				btnTransaction.setVisibility(View.VISIBLE);
+			}
 			else
 			{
-				Toast.makeText(getApplicationContext(), "Login Fail.", 7000).show();
-				finish();
+				Toast.makeText(getApplicationContext(), "Login Fail.", 7000).show();				
 				Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
 				startActivity(newActivity);
+				overridePendingTransition(R.animator.right_in, R.animator.left_out);
+				finish();
 			}
 
 		}
