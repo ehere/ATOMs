@@ -13,21 +13,28 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 @SuppressLint("ShowToast")
 public class OrderListActivity extends Activity 
@@ -48,6 +55,177 @@ public class OrderListActivity extends Activity
         
         lisView1 = (ListView)findViewById(R.id.listView1); 
 		lisView1.setTextFilterEnabled(true);
+		
+		lisView1.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// When clicked, show a toast with the TextView text
+				LinearLayout ll = (LinearLayout) view; // get the parent layout view
+				final TextView orderID = (TextView) ll.findViewById(R.id.ColOrderID);
+				TextView orderAmount = (TextView) ll.findViewById(R.id.ColAmount);
+				TextView orderStatus = (TextView) ll.findViewById(R.id.ColStatus);
+				TextView orderRawStatus = (TextView) ll.findViewById(R.id.ColRaw);
+				AlertDialog.Builder builder1 = new AlertDialog.Builder(OrderListActivity.this);
+	            builder1.setMessage(
+	            		Html.fromHtml("<b>Amount: </b>"+orderAmount.getText()
+	            				+"<br /><b>Status: </b>"+orderStatus.getText()));
+	            
+	            builder1.setCancelable(true);
+	            builder1.setTitle("Order #"+orderID.getText());
+	            int status = Integer.parseInt((String) orderRawStatus.getText());
+	            if(status == 0){
+	            	//Change from unpaid to paid
+	            	builder1.setPositiveButton("Mark as Paid",
+		                    new DialogInterface.OnClickListener() {
+		                        public void onClick(DialogInterface dialog, int id) {
+		                        	FileManager tokenFile = new FileManager("token", getBaseContext());
+		            		        ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+		            		        params.add(new BasicNameValuePair("token", tokenFile.read()));
+		            		        
+		                        	ArrayList<NameValuePair> updateParams = new ArrayList<NameValuePair>();
+		                        	updateParams.add(new BasicNameValuePair("token", tokenFile.read()));
+		                        	updateParams.add(new BasicNameValuePair("mark_as_paid", "1"));
+		            		        
+		                        	updateParams.add(new BasicNameValuePair("id", (String) orderID.getText()));
+		                        	
+		                        	HttpRequest request = new HttpRequest("https://www.diyby.me/android-connect/set_user_order.php");
+		            		    	JSONObject result = request.get(updateParams);
+		            		    	if(result == null) //no internet connection.
+		                    		{
+		                    			Toast.makeText(getBaseContext(), "No Internet Connection.", 7000).show();
+		                    			//do something
+		                    		}
+		                    		else
+		                    		{
+		                    			try {
+											Toast.makeText(getBaseContext(), result.getString("message"), 7000).show();
+											Intent intent = getIntent();
+										    finish();
+										    startActivity(intent);
+										} catch (JSONException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+		                    		}
+		            		    	dialog.cancel();
+		                        }
+		                    });
+	            }
+	            else{
+	            	//Change from paid to unpaid
+	            	builder1.setNeutralButton("Mark as Not Paid",
+		                    new DialogInterface.OnClickListener() {
+		                        public void onClick(DialogInterface dialog, int id) {
+		                        	FileManager tokenFile = new FileManager("token", getBaseContext());
+		            		        ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+		            		        params.add(new BasicNameValuePair("token", tokenFile.read()));
+		            		        
+		                        	ArrayList<NameValuePair> updateParams = new ArrayList<NameValuePair>();
+		                        	updateParams.add(new BasicNameValuePair("token", tokenFile.read()));
+		                        	updateParams.add(new BasicNameValuePair("mark_as_not_paid", "1"));
+		            		        
+		                        	updateParams.add(new BasicNameValuePair("id", (String) orderID.getText()));
+		                        	
+		                        	HttpRequest request = new HttpRequest("https://www.diyby.me/android-connect/set_user_order.php");
+		            		    	JSONObject result = request.get(updateParams);
+		            		    	if(result == null) //no internet connection.
+		                    		{
+		                    			Toast.makeText(getBaseContext(), "No Internet Connection.", 7000).show();
+		                    			//do something
+		                    		}
+		                    		else
+		                    		{
+		                    			try {
+											Toast.makeText(getBaseContext(), result.getString("message"), 7000).show();
+											Intent intent = getIntent();
+										    finish();
+										    startActivity(intent);
+										} catch (JSONException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+		                    		}
+		            		    	dialog.cancel();
+
+		                        }
+		                    });
+	            	builder1.setPositiveButton("Mark as Shipped",
+		                    new DialogInterface.OnClickListener() {
+		                        public void onClick(DialogInterface dialog, int id) {
+		                        	FileManager tokenFile = new FileManager("token", getBaseContext());
+		            		        ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+		            		        params.add(new BasicNameValuePair("token", tokenFile.read()));
+		            		        
+		                        	ArrayList<NameValuePair> updateParams = new ArrayList<NameValuePair>();
+		                        	updateParams.add(new BasicNameValuePair("token", tokenFile.read()));
+		                        	updateParams.add(new BasicNameValuePair("mark_as_shipped", "1"));
+		            		        
+		                        	updateParams.add(new BasicNameValuePair("id", (String) orderID.getText()));
+		                        	
+		                        	HttpRequest request = new HttpRequest("https://www.diyby.me/android-connect/set_user_order.php");
+		            		    	JSONObject result = request.get(updateParams);
+		            		    	if(result == null) //no internet connection.
+		                    		{
+		                    			Toast.makeText(getBaseContext(), "No Internet Connection.", 7000).show();
+		                    			//do something
+		                    		}
+		                    		else
+		                    		{
+		                    			try {
+											Toast.makeText(getBaseContext(), result.getString("message"), 7000).show();
+											Intent intent = getIntent();
+										    finish();
+										    startActivity(intent);
+										} catch (JSONException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+		                    		}
+		            		    	dialog.cancel();
+
+		                        }
+		                    });
+	            }
+
+	            builder1.setNegativeButton("Delete",
+	                    new DialogInterface.OnClickListener() {
+	                        public void onClick(DialogInterface dialog, int id) {
+	                        	FileManager tokenFile = new FileManager("token", getBaseContext());
+	            		        ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+	            		        params.add(new BasicNameValuePair("token", tokenFile.read()));
+	            		        
+	                        	ArrayList<NameValuePair> updateParams = new ArrayList<NameValuePair>();
+	                        	updateParams.add(new BasicNameValuePair("token", tokenFile.read()));
+	                        	updateParams.add(new BasicNameValuePair("delete", "1"));
+	            		        
+	                        	updateParams.add(new BasicNameValuePair("id", (String) orderID.getText()));
+	                        	
+	                        	HttpRequest request = new HttpRequest("https://www.diyby.me/android-connect/set_user_order.php");
+	            		    	JSONObject result = request.get(updateParams);
+	            		    	if(result == null) //no internet connection.
+	                    		{
+	                    			Toast.makeText(getBaseContext(), "No Internet Connection.", 7000).show();
+	                    			//do something
+	                    		}
+	                    		else
+	                    		{
+	                    			try {
+										Toast.makeText(getBaseContext(), result.getString("message"), 7000).show();
+										Intent intent = getIntent();
+									    finish();
+									    startActivity(intent);
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+	                    		}
+	            		    	dialog.cancel();
+	                        }
+	            });
+	            AlertDialog alert11 = builder1.create();
+	            alert11.show();
+			}
+		});
 	}
 
 	@Override
@@ -189,12 +367,16 @@ public class OrderListActivity extends Activity
         						map = new HashMap<String, String>();
         						map.put("ID", order.getString("id"));
         				       	map.put("Amount", "ß" + order.getString("money"));
+        				       	map.put("rawStatus", order.getString("status"));
         				       	if(order.getString("status").equals("0")){
         				       		//not paid
-        				       		map.put("Status", "Not Paid!");
+        				       		map.put("Status", "Not Paid");
         				       	}
-        				       	else{
-        				       		map.put("Status", "Paid!");
+        				       	else if(order.getString("status").equals("1")){	//not paid
+        				       		map.put("Status", "Paid");
+        				       	}
+        						else{
+        				       		map.put("Status", "Shipped");
         				       	}
         				       	MyArrList.add(map);
         					}
@@ -214,7 +396,7 @@ public class OrderListActivity extends Activity
 		        
 		        SimpleAdapter sAdap;
 		        sAdap = new SimpleAdapter(OrderListActivity.this, MyArrList, R.layout.activity_orderlistcolumn,
-		                new String[] {"ID", "Amount", "Status"}, new int[] {R.id.ColOrderID, R.id.ColAmount, R.id.ColStatus});      
+		                new String[] {"ID", "Amount", "Status", "rawStatus"}, new int[] {R.id.ColOrderID, R.id.ColAmount, R.id.ColStatus, R.id.ColRaw});      
 		        lisView1.setAdapter(sAdap);
 			}
 			else

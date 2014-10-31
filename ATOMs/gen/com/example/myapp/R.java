@@ -35,11 +35,12 @@ public final class R {
         public static final int ColBankName=0x7f090002;
         public static final int ColMessage=0x7f090003;
         public static final int ColOrderID=0x7f090011;
+        public static final int ColRaw=0x7f090014;
         public static final int ColStatus=0x7f090013;
         public static final int ColTime=0x7f090004;
         public static final int Value=0x7f090001;
-        public static final int action_logout=0x7f090015;
-        public static final int action_settings=0x7f090014;
+        public static final int action_logout=0x7f090016;
+        public static final int action_settings=0x7f090015;
         public static final int button1=0x7f09000d;
         public static final int button2=0x7f09000e;
         public static final int button3=0x7f09000f;
