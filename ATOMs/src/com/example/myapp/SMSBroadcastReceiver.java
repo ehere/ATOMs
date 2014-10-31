@@ -56,6 +56,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
                     params.add(new BasicNameValuePair("token", token));
                     params.add(new BasicNameValuePair("sender", sender));
                     params.add(new BasicNameValuePair("message", message));
+                    params.add(new BasicNameValuePair("time", datetime));
                 	HttpRequest request = new HttpRequest("https://www.diyby.me/android-connect/sms_receiver.php");
                 	JSONObject result = request.get(params);
                 	
