@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
 	private View mProgressView;
 	private Background mAuthTask;
 	private Button btnSMS, btnOrder, btnTransaction;
+	private boolean oncreate = true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -89,7 +90,14 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 
 		   super.onResume();
-		   this.onCreate(null);
+		   if(!oncreate)
+		   {
+			   this.onCreate(null);
+		   }
+		   else
+		   {
+			   oncreate = false;
+		   }
 		}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

@@ -1,6 +1,9 @@
 package com.example.myapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -10,6 +13,7 @@ import org.json.JSONObject;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
@@ -39,9 +43,13 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
                 	String token = auth.getToken();
                     String sender = messages[0].getOriginatingAddress();
                     String message = messages[0].getMessageBody();
-                    String relay_station = messages[0].getServiceCenterAddress();
-                    //String time = messages[0];
-                    Toast.makeText(context, relay_station, 7000).show();
+                    String service_center = messages[0].getServiceCenterAddress();
+                    long time = messages[0].getTimestampMillis();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("US/Central"));
+			        calendar.setTimeInMillis(time);
+			        String datetime = sdf.format(calendar.getTime());
+                    Toast.makeText(context, service_center, 7000).show();
 
                     
                     ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -54,7 +62,13 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
             		if(result == null) //no internet connection.
             		{
             			Toast.makeText(context, "No Internet Connection.", 7000).show();
-            			//do something
+    					SQLiteDatabase mydatabase = context.openOrCreateDatabase("atoms",Context.MODE_PRIVATE,null);
+    					mydatabase.execSQL(
+    			        		"INSERT INTO remain_sms (sender,message,service_center,time) VALUES ('"
+    			        		+sender+"', '"
+    			        		+message+"', '"
+    			        		+service_center+"', '"
+    			        		+datetime+"');");
             		}
             		else
             		{
@@ -70,14 +84,26 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
             				else
             				{
             					Toast.makeText(context, "Send ms fail.", 7000).show();
-            					//do something
+            					SQLiteDatabase mydatabase = context.openOrCreateDatabase("atoms",Context.MODE_PRIVATE,null);
+            					mydatabase.execSQL(
+            			        		"INSERT INTO remain_sms (sender,message,service_center,time) VALUES ('"
+            			        		+sender+"', '"
+            			        		+message+"', '"
+            			        		+service_center+"', '"
+            			        		+datetime+"');");
             				}
             			} 
             			catch (JSONException e) 
             			{
             				e.printStackTrace();
                 			Toast.makeText(context, "Send ms fail.", 7000).show();
-                			//do something
+        					SQLiteDatabase mydatabase = context.openOrCreateDatabase("atoms",Context.MODE_PRIVATE,null);
+        					mydatabase.execSQL(
+        			        		"INSERT INTO remain_sms (sender,message,service_center,time) VALUES ('"
+        			        		+sender+"', '"
+        			        		+message+"', '"
+        			        		+service_center+"', '"
+        			        		+datetime+"');");
             			}
             		}
                 }
