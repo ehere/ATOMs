@@ -2,10 +2,10 @@ package com.example.myapp;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -27,13 +27,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A login screen that offers login via email/password.
  */
+@SuppressLint("ShowToast")
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 	
 	/**
@@ -267,7 +267,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 				ContactsContract.CommonDataKinds.Email.IS_PRIMARY, };
 
 		int ADDRESS = 0;
-		int IS_PRIMARY = 1;
+		//int IS_PRIMARY = 1;
 	}
 
 	private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
