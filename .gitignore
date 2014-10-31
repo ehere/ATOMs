@@ -1,3 +1,5 @@
 .metadata/*
 ATOMs/bin/*
 !ATOMs/bin/AndroidManifest.xml
+ATOMs/bin/ATOMs.apk
+ATOMs/bin/resources.ap_
