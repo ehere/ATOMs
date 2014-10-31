@@ -1,0 +1,2 @@
+./ATOMs/bin/*
+!./ATOMs/bin/AndroidManifest.xml
