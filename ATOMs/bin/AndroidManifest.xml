@@ -67,6 +67,7 @@
                 android:value="com.example.myapp.MainActivity" />
         </activity>
         
+        
     </application>
 
 
