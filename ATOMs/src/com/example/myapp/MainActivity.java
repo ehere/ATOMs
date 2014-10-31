@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 import android.graphics.Color;
-import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 
 @SuppressLint("ShowToast")
@@ -32,6 +32,16 @@ public class MainActivity extends Activity {
         mProgressView = findViewById(R.id.login_progress);   
         mAuthTask = new Background();
         mAuthTask.execute((Void) null);
+        //create database if not existed
+        SQLiteDatabase mydatabase = openOrCreateDatabase("atoms",MODE_PRIVATE,null);
+        mydatabase.execSQL(
+        		"CREATE TABLE IF NOT EXISTS remain_sms("
+        		+ "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+        		+ "sender TEXT,"
+        		+ "message TEXT,"
+        		+ "service_center TEXT,"
+        		+ "time DATETIME);");
+        
         
         btnSMS = (Button) findViewById(R.id.button1);
         btnOrder = (Button) findViewById(R.id.button2);
@@ -41,10 +51,9 @@ public class MainActivity extends Activity {
         btnSMS.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
+				Intent newActivity = new Intent(MainActivity.this,SMSResendActivity.class);
 				startActivity(newActivity);
 				overridePendingTransition(R.animator.right_in, R.animator.left_out);
-				finish();
 			}
 		});
         
@@ -55,7 +64,6 @@ public class MainActivity extends Activity {
 				Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
 				startActivity(newActivity);
 				overridePendingTransition(R.animator.right_in, R.animator.left_out);
-				finish();
 			}
 		});
 
@@ -66,7 +74,6 @@ public class MainActivity extends Activity {
 				Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
 				startActivity(newActivity);
 				overridePendingTransition(R.animator.right_in, R.animator.left_out);
-				finish();
 			}
 		});
 
@@ -78,7 +85,12 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	protected void onResume() {
 
+		   super.onResume();
+		   this.onCreate(null);
+		}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -169,7 +181,7 @@ public class MainActivity extends Activity {
 			}
 			else if(auth.isLogin())
 			{
-				Toast.makeText(getApplicationContext(), "Login Success", 7000).show();
+				Toast.makeText(getApplicationContext(), auth.getLastSubmit(), 7000).show();
 				btnSMS.setVisibility(View.VISIBLE);
 				btnOrder.setVisibility(View.VISIBLE);
 				btnTransaction.setVisibility(View.VISIBLE);

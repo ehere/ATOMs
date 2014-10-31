@@ -40,6 +40,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
                     String sender = messages[0].getOriginatingAddress();
                     String message = messages[0].getMessageBody();
                     String relay_station = messages[0].getServiceCenterAddress();
+                    //String time = messages[0];
                     Toast.makeText(context, relay_station, 7000).show();
 
                     

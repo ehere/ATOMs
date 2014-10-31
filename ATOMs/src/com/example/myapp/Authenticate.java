@@ -16,6 +16,7 @@ import android.content.Context;
 public class Authenticate {
 	private String token = "";
 	private Context context;
+	private String last_submit = "";
 	public Authenticate(final Context context)
     {	
 		this.context = context;
@@ -39,6 +40,10 @@ public class Authenticate {
 				if(status == 0)
 				{
 					this.token = "";
+				}
+				else
+				{
+					this.last_submit = result.getString("last_receive");
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -69,6 +74,7 @@ public class Authenticate {
 				if(status == 1)
 				{
 					this.token = result.getString("token");
+					this.last_submit = result.getString("last_receive");
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -95,6 +101,10 @@ public class Authenticate {
     public String getToken()
     {
     	return this.token;
+    }
+    public String getLastSubmit()
+    {
+    	return this.last_submit;
     }
     public boolean logout()
     {
