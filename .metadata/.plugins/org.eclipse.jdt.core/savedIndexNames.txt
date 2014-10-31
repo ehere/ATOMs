@@ -1,7 +1,0 @@
-INDEX VERSION 1.127+C:\Users\tanasab\Documents\GitHub\ATOMs\.metadata\.plugins\org.eclipse.jdt.core
-1284074322.index
-1873105954.index
-477059856.index
-3602378583.index
-389206866.index
-4204977373.index

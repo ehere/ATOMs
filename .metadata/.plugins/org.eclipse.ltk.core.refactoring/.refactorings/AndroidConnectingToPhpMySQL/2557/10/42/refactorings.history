@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;JSONParser.java&apos; to &apos;Myapp/src/com.example.myapp&apos;&#x0D;&#x0A;- Original project: &apos;AndroidConnectingToPhpMySQL&apos;&#x0D;&#x0A;- Destination element: &apos;Myapp/src/com.example.myapp&apos;&#x0D;&#x0A;- Original element: &apos;com.example.androidhive.JSONParser.java&apos;" description="Copy compilation unit" destination="=Myapp/src&lt;com.example.myapp" element1="/src&lt;com.example.androidhive{JSONParser.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1413353248495" units="1" version="1.0"/>
-</session>
