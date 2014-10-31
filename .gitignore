@@ -1,2 +1,9 @@
 .metadata/*
-ATOMs/bin/*
+ATOMs/bin/ATOMs.apk
+ATOMs/bin/classes.dex
+ATOMs/bin/jarlist.cache
+ATOMs/bin/Myapp.apk
+ATOMs/bin/R.txt
+ATOMs/bin/resources.ap_
+ATOMs/bin/res/*
+ATOMs/bin/dexedLibs/*
