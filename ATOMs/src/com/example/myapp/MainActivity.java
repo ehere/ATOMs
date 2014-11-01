@@ -1,9 +1,18 @@
 package com.example.myapp;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.sqlite.SQLiteDatabase;
@@ -42,8 +51,32 @@ public class MainActivity extends Activity {
         		+ "message TEXT,"
         		+ "service_center TEXT,"
         		+ "time DATETIME);");
-        
-        
+
+        mydatabase.execSQL(
+        		"CREATE TABLE IF NOT EXISTS bank_name("
+        		+ "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+        		+ "name TEXT,"
+        		+ "number TEXT);"); 
+
+        ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
+    	HttpRequest request = new HttpRequest("https://www.diyby.me/android-connect/get_bank_detail.php");
+    	JSONObject result = request.get(params);
+		if(result != null) //no internet connection.
+		{
+			mydatabase.execSQL("DELETE FROM bank_name;");
+	        Iterator<?> keys = result.keys();
+
+	        while( keys.hasNext() ){
+	            String bankname = (String)keys.next();
+	            try {
+					mydatabase.execSQL("INSERT INTO bank_name (name,number) VALUES ('"+bankname+"', '"+result.get(bankname)+"');");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+	        }
+			
+		}
+    	
         btnSMS = (Button) findViewById(R.id.button1);
         btnOrder = (Button) findViewById(R.id.button2);
         btnTransaction = (Button) findViewById(R.id.button3);
