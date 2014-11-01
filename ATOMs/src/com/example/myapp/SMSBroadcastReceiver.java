@@ -3,14 +3,12 @@ package com.example.myapp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.TimeZone;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +18,7 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
+@SuppressLint({ "ShowToast", "SimpleDateFormat" })
 public class SMSBroadcastReceiver extends BroadcastReceiver
 {
     private static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";

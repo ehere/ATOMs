@@ -35,7 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-@SuppressLint("ShowToast")
+@SuppressLint({ "ShowToast", "SetJavaScriptEnabled" })
 public class OrderListActivity extends Activity 
 {
 	private View mProgressView, orderProgressView;
