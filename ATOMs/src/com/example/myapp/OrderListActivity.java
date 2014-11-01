@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -95,6 +96,13 @@ public class OrderListActivity extends Activity
 	                		setVisible(lisView1, false);
 	                		setVisible(myWebView, true);
 	                		myWebView.loadUrl((String) orderURLView.getText());
+	                		myWebView.setWebViewClient(new WebViewClient() {
+	                	        @Override
+	                	        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+	                	            view.loadUrl(url);
+	                	            return false;
+	                	        }
+	                	    });
 	                	}
 	                	else if(item < 4 )
 	                	{
@@ -139,7 +147,11 @@ public class OrderListActivity extends Activity
 		return true;
 	}
 	public void onBackPressed() {
-		if(myWebView.getVisibility() == View.VISIBLE)
+		if(myWebView.canGoBack())
+		{
+			myWebView.goBack();
+		}
+		else if(myWebView.getVisibility() == View.VISIBLE)
 		{
 			setVisible(myWebView, false);
 			setVisible(lisView1, true);
@@ -160,7 +172,11 @@ public class OrderListActivity extends Activity
 		int id = item.getItemId();
 		if (id == android.R.id.home) 
 		{
-			if(myWebView.getVisibility() == View.VISIBLE)
+			if(myWebView.canGoBack())
+			{
+				myWebView.goBack();
+			}
+			else if(myWebView.getVisibility() == View.VISIBLE)
 			{
 				setVisible(myWebView, false);
 				setVisible(lisView1, true);
