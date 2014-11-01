@@ -14,7 +14,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -163,7 +162,7 @@ public class SMSResendActivity extends Activity
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	public void showProgress(View ProgressView,final boolean show) {
+	public void setVisible(final View view,final boolean show) {
 		// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
 		// for very easy animations. If available, use these APIs to fade-in
 		// the progress spinner.
@@ -172,20 +171,20 @@ public class SMSResendActivity extends Activity
 					android.R.integer.config_shortAnimTime);
 			
 
-			ProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-			ProgressView.animate().setDuration(shortAnimTime)
+			view.setVisibility(show ? View.VISIBLE : View.GONE);
+			view.animate().setDuration(shortAnimTime)
 					.alpha(show ? 1 : 0)
 					.setListener(new AnimatorListenerAdapter() {
 						@Override
 						public void onAnimationEnd(Animator animation) {
-							mProgressView.setVisibility(show ? View.VISIBLE
+							view.setVisibility(show ? View.VISIBLE
 									: View.GONE);
 						}
 					});
 		} else {
 			// The ViewPropertyAnimator APIs are not available, so simply show
 			// and hide the relevant UI components.
-			ProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+			view.setVisibility(show ? View.VISIBLE : View.GONE);
 		}
 	}
 	
@@ -212,7 +211,7 @@ public class SMSResendActivity extends Activity
 		@Override
 		protected void onPostExecute(final Boolean success) {
 			mAuthTask = null;
-			showProgress(mProgressView, false);
+			setVisible(mProgressView, false);
 			if(!auth.isConnect())
 			{
 				Toast.makeText(getApplicationContext(), "No Internet Connection.", 7000).show();
@@ -228,8 +227,8 @@ public class SMSResendActivity extends Activity
 				Cursor  cursor = mydatabase.rawQuery("select * from remain_sms ORDER BY id desc",null);
 				if (cursor .moveToFirst()) 
 				{
-
-		            while (cursor.isAfterLast() == false) {
+		            while (cursor.isAfterLast() == false) 
+		            {
 		            	map = new HashMap<String, String>();
 		            	map.put("Value", Integer.toString(cursor.getInt(cursor.getColumnIndex("id"))));
 				       	map.put("Bank", cursor.getString(cursor.getColumnIndex("sender")));
@@ -240,10 +239,7 @@ public class SMSResendActivity extends Activity
 						MyArrList.add(map);
 		                cursor.moveToNext();
 		            }
-		        }
-
-
-		       
+		        } 
 		        
 		        sAdap = new SimpleAdapter(SMSResendActivity.this, MyArrList, R.layout.activity_column,
 		                new String[] {"Value", "Bank", "Message", "Time"}, new int[] {R.id.Value, R.id.ColBankName, R.id.ColMessage, R.id.ColTime});      
@@ -267,17 +263,16 @@ public class SMSResendActivity extends Activity
 		private int mode;
 		DialogBackgroud(int mode) {
 			this.mode = mode;
-			showProgress(resendProgressView, true);
-			showProgress(tvBankName, false);
-			showProgress(tvMessage, false);
-			showProgress(tvTime, false);
+			setVisible(resendProgressView, true);
+			setVisible(tvBankName, false);
+			setVisible(tvMessage, false);
+			setVisible(tvTime, false);
 		}
 		
 
 		@Override
-		protected Boolean doInBackground(Void... params) {
-			
-
+		protected Boolean doInBackground(Void... params) 
+		{
 			auth = new Authenticate(getApplicationContext());
 			if(!auth.isConnect())
 			{
@@ -301,20 +296,17 @@ public class SMSResendActivity extends Activity
             		return false;
         		}
         		else
-        		{
-        			
+        		{	
         			try 
         			{
         				int status = result.getInt("success");
         				if(status == 1)
         				{
         					return true;
-                			
         				}
         				else
         				{
         					return false;
-        					
         				}
         			} 
         			catch (JSONException e) 
@@ -329,10 +321,6 @@ public class SMSResendActivity extends Activity
 			{
 				return false;
 			}
-			
-
-			// TODO: register the new account here.
-			//return true;
 		}
 
 		@Override
@@ -343,18 +331,18 @@ public class SMSResendActivity extends Activity
 				if(!auth.isConnect())
 				{
 					Toast.makeText(getApplicationContext(), "No Internet Connection.", 7000).show();
-					showProgress(resendProgressView, false);
-					showProgress(tvBankName, true);
-					showProgress(tvMessage, true);
-					showProgress(tvTime, true);
+					setVisible(resendProgressView, false);
+					setVisible(tvBankName, true);
+					setVisible(tvMessage, true);
+					setVisible(tvTime, true);
 				}
 				else if(auth.isLogin())
 				{
 					Toast.makeText(getApplicationContext(), "Something Wrong.", 7000).show();
-					showProgress(resendProgressView, false);
-					showProgress(tvBankName, true);
-					showProgress(tvMessage, true);
-					showProgress(tvTime, true);
+					setVisible(resendProgressView, false);
+					setVisible(tvBankName, true);
+					setVisible(tvMessage, true);
+					setVisible(tvTime, true);
 	
 				}
 				else
@@ -370,7 +358,7 @@ public class SMSResendActivity extends Activity
 			{
 				SQLiteDatabase mydatabase = openOrCreateDatabase("atoms",MODE_PRIVATE,null);
 				mydatabase.execSQL("DELETE FROM `remain_sms` WHERE id = "+value.getText()+";");
-				showProgress(resendProgressView, false);
+				setVisible(resendProgressView, false);
                 MyArrList.remove(row);
                 sAdap.notifyDataSetChanged();
 			}
