@@ -52,7 +52,7 @@
         
         <activity
             android:name=".SMSResendActivity"
-            android:label="@string/title_activity_login"
+            android:label="@string/title_activity_resendsms"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
