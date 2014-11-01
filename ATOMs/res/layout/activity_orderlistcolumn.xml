@@ -50,6 +50,15 @@
         android:visibility="gone"
         android:text="Status" />
     <TextView
+        android:id="@+id/ColURL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:visibility="gone"
+        android:text="URL" />
+    <TextView
         android:id="@+id/ColColor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

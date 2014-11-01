@@ -25,10 +25,11 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -37,7 +38,8 @@ import android.widget.AdapterView.OnItemClickListener;
 public class OrderListActivity extends Activity 
 {
 	private View mProgressView, orderProgressView;
-	private TextView orderID, orderAmount, orderStatus, orderRawStatus;
+	private TextView orderID, orderAmount, orderStatus, orderURLView;
+	private WebView myWebView;
 	private LinearLayout rowview;
 	private Background mAuthTask;
 	private ListView lisView1;
@@ -50,12 +52,16 @@ public class OrderListActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		setContentView(R.layout.activity_smsresend);
+		setContentView(R.layout.activity_orderlist);
 		
 		mProgressView = findViewById(R.id.login_progress);   
         mAuthTask = new Background();
         mAuthTask.execute((Void) null);
-
+        
+        myWebView = (WebView) findViewById(R.id.webview);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        
         
         lisView1 = (ListView)findViewById(R.id.listView1); 
 		lisView1.setTextFilterEnabled(true);	
@@ -68,8 +74,8 @@ public class OrderListActivity extends Activity
 				orderID = (TextView) rowview.findViewById(R.id.ColOrderID);
 				orderAmount = (TextView) rowview.findViewById(R.id.ColAmount);
 				orderStatus = (TextView) rowview.findViewById(R.id.ColStatus);
-				orderRawStatus = (TextView) rowview.findViewById(R.id.ColRaw);
 				orderProgressView = rowview.findViewById(R.id.order_progress);
+				orderURLView = (TextView) rowview.findViewById(R.id.ColURL);
 				AlertDialog.Builder builder1 = new AlertDialog.Builder(OrderListActivity.this);
 	            builder1.setMessage(
 	            		Html.fromHtml("<b>Amount: </b>"+orderAmount.getText()
@@ -78,18 +84,24 @@ public class OrderListActivity extends Activity
 	            builder1.setCancelable(true);
 	            builder1.setTitle("Order #"+orderID.getText());
 	            
-	            final CharSequence[] items = {"Mark as Paid", "Mark as Not Paid", "Mark as Shipped", "Delete", "Cancel"};
+	            final CharSequence[] items = {"Open Invoice", "Mark as Paid", "Mark as Not Paid", "Mark as Shipped", "Delete", "Cancel"};
 
 	            AlertDialog.Builder builder = new AlertDialog.Builder(OrderListActivity.this);
 	            builder.setTitle("Make your selection");
 	            builder.setItems(items, new DialogInterface.OnClickListener() {
 	                public void onClick(DialogInterface dialog, int item) {
-	                	if(item < 3 )
+	                	if(item == 0)
 	                	{
-	                		resendTask = new DialogBackgroud(item+1);
+	                		setVisible(lisView1, false);
+	                		setVisible(myWebView, true);
+	                		myWebView.loadUrl((String) orderURLView.getText());
+	                	}
+	                	else if(item < 4 )
+	                	{
+	                		resendTask = new DialogBackgroud(item);
                         	resendTask.execute((Void) null);
 	                	}
-	                	else if(item == 3)
+	                	else if(item == 4)
 	                	{
 	        	            AlertDialog.Builder builder1 = new AlertDialog.Builder(OrderListActivity.this);
 	        	            builder1.setTitle("Are You Sure?");
@@ -127,9 +139,17 @@ public class OrderListActivity extends Activity
 		return true;
 	}
 	public void onBackPressed() {
-	    super.onBackPressed();
-	    overridePendingTransition(R.animator.left_in, R.animator.right_out);
-	    finish();
+		if(myWebView.getVisibility() == View.VISIBLE)
+		{
+			setVisible(myWebView, false);
+			setVisible(lisView1, true);
+		}
+		else
+		{
+			super.onBackPressed();
+	    	overridePendingTransition(R.animator.left_in, R.animator.right_out);
+	    	finish();
+		}
 	}
 	
 	@Override
@@ -140,8 +160,16 @@ public class OrderListActivity extends Activity
 		int id = item.getItemId();
 		if (id == android.R.id.home) 
 		{
-			finish();
-			overridePendingTransition(R.animator.left_in, R.animator.right_out);
+			if(myWebView.getVisibility() == View.VISIBLE)
+			{
+				setVisible(myWebView, false);
+				setVisible(lisView1, true);
+			}
+			else
+			{
+				finish();
+				overridePendingTransition(R.animator.left_in, R.animator.right_out);
+			}
 	        return true;
 	    }
 		if (id == R.id.action_settings) 
@@ -260,6 +288,7 @@ public class OrderListActivity extends Activity
         						map.put("ID", order.getString("id"));
         				       	map.put("Amount", "ß" + order.getString("money"));
         				       	map.put("rawStatus", order.getString("status"));
+        				       	map.put("URL", order.getString("url"));
         				       	if(order.getString("status").equals("0")){
         				       		//not paid
         				       		map.put("Status", "Not Paid");
@@ -290,7 +319,7 @@ public class OrderListActivity extends Activity
         		}
 		        
 		        sAdap = new SpecialAdapter(OrderListActivity.this, MyArrList, R.layout.activity_orderlistcolumn,
-		                new String[] {"ID", "Amount", "Status", "rawStatus","Color"}, new int[] {R.id.ColOrderID, R.id.ColAmount, R.id.ColStatus, R.id.ColRaw, R.id.ColColor});      
+		                new String[] {"ID", "Amount", "Status", "rawStatus", "URL", "Color"}, new int[] {R.id.ColOrderID, R.id.ColAmount, R.id.ColStatus, R.id.ColRaw, R.id.ColURL, R.id.ColColor});      
 		        lisView1.setAdapter(sAdap);
 			}
 			else

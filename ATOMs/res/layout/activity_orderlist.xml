@@ -27,6 +27,11 @@
 	    android:visibility="gone">
 
 	</ListView>
+	<WebView
+		android:id="@+id/webview"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:visibility="gone"/>
 
 
 
