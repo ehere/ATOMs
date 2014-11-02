@@ -19,12 +19,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.Toast;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.StateListDrawable;
 
 @SuppressLint("ShowToast")
 public class MainActivity extends Activity {
@@ -79,7 +82,27 @@ public class MainActivity extends Activity {
         btnOrder = (Button) findViewById(R.id.button2);
         btnTransaction = (Button) findViewById(R.id.button3);
         
-        btnSMS.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+        StateListDrawable slDraw = new StateListDrawable(); 
+        slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_select));
+        slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_select));   
+        slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_select)); 
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_message_bg)); 
+    	btnSMS.setBackground(slDraw);
+    	
+    	slDraw = new StateListDrawable(); 
+        slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_select));
+        slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_select));   
+        slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_select)); 
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_order));     	
+    	btnOrder.setBackground(slDraw);
+    	
+    	slDraw = new StateListDrawable(); 
+        slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_select));
+        slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_select));   
+        slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_select)); 
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_transaction)); 
+    	btnTransaction.setBackground(slDraw);
+        
         btnSMS.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -88,8 +111,8 @@ public class MainActivity extends Activity {
 				overridePendingTransition(R.animator.right_in, R.animator.left_out);
 			}
 		});
-        
-        btnOrder.getBackground().setColorFilter(Color.parseColor("#00D0FF"), PorterDuff.Mode.MULTIPLY);
+
+
         btnOrder.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -99,7 +122,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
-        btnTransaction.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
+        
         btnTransaction.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {

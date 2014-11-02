@@ -1,93 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:screenOrientation="portrait"
-    tools:context="com.example.myapp.MainActivity" >
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:paddingTop="0dp"
+	android:paddingBottom="@dimen/activity_vertical_margin"
+	android:paddingLeft="@dimen/activity_horizontal_margin"
+	android:paddingRight="@dimen/activity_horizontal_margin"
+	android:screenOrientation="portrait"
+	android:background="@drawable/background_color"
+	tools:context="com.example.myapp.MainActivity" >
 
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="visible" />
-
-	<ScrollView
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent">
-
-		<LinearLayout
-			android:orientation="vertical"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-		    android:paddingBottom="@dimen/activity_vertical_margin"
-		    android:paddingLeft="@dimen/activity_horizontal_margin"
-		    android:paddingRight="@dimen/activity_horizontal_margin">
-		    <Button
-		        android:id="@+id/button1"
-		        android:layout_width="match_parent"
-		        android:layout_height="100dp"
-		        android:visibility="gone" 
-		        android:text="@string/remain_sms" />
+	<ProgressBar
+		android:id="@+id/login_progress"
+		style="?android:attr/progressBarStyleLarge"
+		android:layout_width="wrap_content"
+		android:layout_height="50dp"
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true"
+		android:visibility="visible" />
 		
-		     <Button
-		         android:id="@+id/button2"
-		         android:layout_width="match_parent"
-		         android:layout_height="100dp"
-		         android:text="@string/invoice"
-		         android:visibility="gone" />
-		     <Button
-		         android:id="@+id/button3"
-		         android:layout_width="match_parent"
-		         android:layout_height="100dp"
-		         android:text="@string/transaction"
-		         android:visibility="gone" />
-		     <!-- 
-		     <Button
-		         android:id="@+id/button4"
-		         android:layout_width="match_parent"
-		         android:layout_height="100dp"
-		         android:text="Button"
-		         android:visibility="visible" />    
-		     <Button
-		         android:id="@+id/button5"
-		         android:layout_width="match_parent"
-		         android:layout_height="100dp"
-		         android:text="Button"
-		         android:visibility="visible" />   
-		     <Button
-		         android:id="@+id/button6"
-		         android:layout_width="match_parent"
-		         android:layout_height="100dp"
-		         android:text="Button"
-		         android:visibility="visible" />   
-		     <Button
-		         android:id="@+id/button7"
-		         android:layout_width="match_parent"
-		         android:layout_height="100dp"
-		         android:text="Button"
-		         android:visibility="visible" />   
-		     <Button
-		         android:id="@+id/button8"
-		         android:layout_width="match_parent"
-		         android:layout_height="100dp"
-		         android:text="Button"
-		         android:visibility="visible" />   
-		     <Button
-		         android:id="@+id/button9"
-		         android:layout_width="match_parent"
-		         android:layout_height="100dp"
-		         android:text="Button"
-		         android:visibility="visible" /> 
-		     -->
-		</LinearLayout>
-	</ScrollView>
+		<Button
+			android:id="@+id/button3"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:background="@drawable/button_transaction"
+			android:visibility="gone" 
+			android:text="@string/transaction" />
+
+		<Button
+			android:id="@+id/button2"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_above="@+id/button3"
+			android:layout_marginBottom="5dp"
+			android:background="@drawable/button_order"
+			android:visibility="gone" 
+			android:text="@string/invoice" />
+
+		<Button
+			android:id="@+id/button1"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_above="@+id/button2"
+			android:layout_centerHorizontal="true"
+			android:layout_marginBottom="5dp"
+			android:background="@drawable/button_message_bg"
+			android:visibility="gone" 
+			android:text="@string/remain_sms" />
+
+		<ImageView
+		    android:id="@+id/imageView1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/button1"
+		    android:layout_alignParentTop="true"
+		    android:contentDescription="@string/app_name"
+		    android:paddingLeft="25dp"
+		    android:paddingRight="25dp"
+		    android:src="@drawable/name" />
 
 </RelativeLayout>
