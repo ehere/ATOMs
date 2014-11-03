@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
         slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_select));
         slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_select));   
         slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_select)); 
-        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_normal)); 
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_alert)); 
     	btnSMS.setBackground(slDraw);
     	
     	slDraw = new StateListDrawable(); 

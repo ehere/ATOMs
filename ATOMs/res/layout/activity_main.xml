@@ -49,7 +49,7 @@
 	                android:id="@+id/button1"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
-	                android:background="@drawable/button_normal"
+	                android:background="@drawable/button_alert"
 	                android:visibility="gone"
 	                android:text="@string/remain_sms" />
 	        </RelativeLayout>
