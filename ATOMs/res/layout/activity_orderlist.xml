@@ -9,6 +9,7 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:screenOrientation="portrait"
+    android:background="@drawable/background_color"
     tools:context="com.example.myapp.OrderListActivity" >
 
     <ProgressBar
@@ -32,7 +33,13 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:visibility="gone"/>
-
+	<TextView
+	    android:id="@+id/error_message"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	    android:layout_centerVertical="true"
+	    android:visibility="gone"/>
 
 
 </RelativeLayout>

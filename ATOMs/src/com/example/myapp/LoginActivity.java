@@ -10,7 +10,7 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.graphics.Typeface;
+import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 	private EditText mPasswordView;
 	private View mProgressView;
 	private View mLoginFormView;
-	private TextView title; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +77,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 				}
 			}
 		}.start();
-		title = (TextView)findViewById(R.id.textView1);
-        Typeface AtomsFont = Typeface.createFromAsset(getAssets(), "fonts/univox.ttf");
-        title.setTypeface(AtomsFont);
-        title.setTextSize(20);
 
 		// Set up the login form.
 		mEmailView = (AutoCompleteTextView) findViewById(R.id.username);
@@ -107,6 +103,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 				attemptLogin();
 			}
 		});
+        StateListDrawable slDraw = new StateListDrawable(); 
+        slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_select));
+        slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_select));   
+        slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_select)); 
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_normal)); 
+        mEmailSignInButton.setBackground(slDraw);
+		
 
 		mLoginFormView = findViewById(R.id.login_form);
 		mProgressView = findViewById(R.id.login_progress);

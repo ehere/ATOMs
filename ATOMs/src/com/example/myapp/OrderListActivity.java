@@ -25,8 +25,10 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,7 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-@SuppressLint("ShowToast")
+@SuppressLint({ "ShowToast", "SetJavaScriptEnabled" })
 public class OrderListActivity extends Activity 
 {
 	private View mProgressView, orderProgressView;
@@ -47,6 +49,8 @@ public class OrderListActivity extends Activity
 	private ArrayList<HashMap<String, String>> MyArrList;
 	private SpecialAdapter sAdap;
 	private int row;
+	private TextView error;
+	private boolean oncreate = true;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,16 @@ public class OrderListActivity extends Activity
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_orderlist);
 		
-		mProgressView = findViewById(R.id.login_progress);   
+		mProgressView = findViewById(R.id.login_progress);  
+		error = (TextView) findViewById(R.id.error_message);
+        error.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				onResume();
+			}
+		});		
+		
+		
         mAuthTask = new Background();
         mAuthTask.execute((Void) null);
         
@@ -95,6 +108,13 @@ public class OrderListActivity extends Activity
 	                		setVisible(lisView1, false);
 	                		setVisible(myWebView, true);
 	                		myWebView.loadUrl((String) orderURLView.getText());
+	                		myWebView.setWebViewClient(new WebViewClient() {
+	                	        @Override
+	                	        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+	                	            view.loadUrl(url);
+	                	            return false;
+	                	        }
+	                	    });
 	                	}
 	                	else if(item < 4 )
 	                	{
@@ -139,7 +159,11 @@ public class OrderListActivity extends Activity
 		return true;
 	}
 	public void onBackPressed() {
-		if(myWebView.getVisibility() == View.VISIBLE)
+		if(myWebView.canGoBack())
+		{
+			myWebView.goBack();
+		}
+		else if(myWebView.getVisibility() == View.VISIBLE)
 		{
 			setVisible(myWebView, false);
 			setVisible(lisView1, true);
@@ -151,7 +175,18 @@ public class OrderListActivity extends Activity
 	    	finish();
 		}
 	}
-	
+	protected void onResume() {
+
+		   super.onResume();
+		   if(!oncreate)
+		   {
+			   this.onCreate(null);
+		   }
+		   else
+		   {
+			   oncreate = false;
+		   }
+		}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -160,7 +195,11 @@ public class OrderListActivity extends Activity
 		int id = item.getItemId();
 		if (id == android.R.id.home) 
 		{
-			if(myWebView.getVisibility() == View.VISIBLE)
+			if(myWebView.canGoBack())
+			{
+				myWebView.goBack();
+			}
+			else if(myWebView.getVisibility() == View.VISIBLE)
 			{
 				setVisible(myWebView, false);
 				setVisible(lisView1, true);
@@ -252,7 +291,8 @@ public class OrderListActivity extends Activity
 			setVisible(mProgressView, false);
 			if(!auth.isConnect())
 			{
-				Toast.makeText(getApplicationContext(), "No Internet Connection.", 7000).show();
+				error.setText("No Internet Connection.\n       Click to refresh.");
+				setVisible(error, true);
 			}
 			else if(auth.isLogin())
 			{
@@ -271,8 +311,8 @@ public class OrderListActivity extends Activity
 		    	JSONObject result = request.get(params);
 		    	if(result == null) //no internet connection.
         		{
-        			Toast.makeText(getBaseContext(), "No Internet Connection.", 7000).show();
-        			//do something
+					error.setText("No Internet Connection.\n       Click to refresh.");
+					setVisible(error, true);
         		}
         		else
         		{
@@ -439,7 +479,8 @@ public class OrderListActivity extends Activity
 			{
 				if(!auth.isConnect())
 				{
-					Toast.makeText(getApplicationContext(), "No Internet Connection.", 7000).show();
+					error.setText("No Internet Connection.\n       Click to refresh.");
+					setVisible(error, true);
 					setVisible(orderID, true);
 					setVisible(orderAmount, true);
 					setVisible(orderStatus, true);

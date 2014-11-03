@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
@@ -42,15 +43,18 @@ public class SMSResendActivity extends Activity
 	private DialogBackgroud resendTask;
 	private ListView lisView1;
 	private SimpleAdapter sAdap;
+	private TextView error;
 	private ArrayList<HashMap<String, String>> MyArrList;
 	private int row;
+	private boolean oncreate = true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_smsresend);
 		
-		mProgressView = findViewById(R.id.login_progress);   
+		mProgressView = findViewById(R.id.login_progress); 
+		error = (TextView) findViewById(R.id.error_message);
         mAuthTask = new Background();
         mAuthTask.execute((Void) null);
         
@@ -107,7 +111,12 @@ public class SMSResendActivity extends Activity
 	            alert11.show();
 			}
 		});
-
+        error.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				onResume();
+			}
+		});
 
 	}
 
@@ -122,6 +131,18 @@ public class SMSResendActivity extends Activity
 	    overridePendingTransition(R.animator.left_in, R.animator.right_out);
 	    finish();
 	}
+	protected void onResume() {
+
+		   super.onResume();
+		   if(!oncreate)
+		   {
+			   this.onCreate(null);
+		   }
+		   else
+		   {
+			   oncreate = false;
+		   }
+		}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -214,7 +235,8 @@ public class SMSResendActivity extends Activity
 			setVisible(mProgressView, false);
 			if(!auth.isConnect())
 			{
-				Toast.makeText(getApplicationContext(), "No Internet Connection.", 7000).show();
+				error.setText("No Internet Connection.\n       Click to refresh.");
+				setVisible(error, true);
 			}
 			else if(auth.isLogin())
 			{
@@ -330,7 +352,8 @@ public class SMSResendActivity extends Activity
 			{
 				if(!auth.isConnect())
 				{
-					Toast.makeText(getApplicationContext(), "No Internet Connection.", 7000).show();
+					error.setText("No Internet Connection.\n       Click to refresh.");
+					setVisible(error, true);
 					setVisible(resendProgressView, false);
 					setVisible(tvBankName, true);
 					setVisible(tvMessage, true);
