@@ -5,9 +5,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
-    <string name="remain_sms">\nSMS Not send\n</string>
-    <string name="transaction">\nTransactions\n</string>
-    <string name="invoice">\nOrder List\n</string>
+    <string name="remain_sms">SMS Not send !</string>
+    <string name="transaction">Transactions</string>
+    <string name="invoice">Order List</string>
     
 
 </resources>

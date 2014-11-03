@@ -104,10 +104,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 			}
 		});
         StateListDrawable slDraw = new StateListDrawable(); 
-        slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_transaction));
-        slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_transaction));   
-        slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_transaction)); 
-        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_select)); 
+        slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_select));
+        slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_select));   
+        slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_select)); 
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_normal)); 
         mEmailSignInButton.setBackground(slDraw);
 		
 

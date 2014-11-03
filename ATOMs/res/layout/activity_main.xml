@@ -10,7 +10,6 @@
 	android:screenOrientation="portrait"
 	android:background="@drawable/background_color"
 	tools:context="com.example.myapp.MainActivity" >
-
 	<ProgressBar
 		android:id="@+id/login_progress"
 		style="?android:attr/progressBarStyleLarge"
@@ -19,46 +18,125 @@
 		android:layout_centerHorizontal="true"
 		android:layout_centerVertical="true"
 		android:visibility="visible" />
-		
-		<Button
-			android:id="@+id/button3"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_alignParentBottom="true"
-			android:background="@drawable/button_transaction"
-			android:visibility="gone" 
-			android:text="@string/transaction" />
 
-		<Button
-			android:id="@+id/button2"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_above="@+id/button3"
-			android:layout_marginBottom="5dp"
-			android:background="@drawable/button_order"
-			android:visibility="gone" 
-			android:text="@string/invoice" />
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:paddingBottom="@dimen/activity_vertical_margin"
+	    android:orientation="vertical"
+	    android:id="@+id/linearLayout1">
 
-		<Button
-			android:id="@+id/button1"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_above="@+id/button2"
-			android:layout_centerHorizontal="true"
-			android:layout_marginBottom="5dp"
-			android:background="@drawable/button_message_bg"
-			android:visibility="gone" 
-			android:text="@string/remain_sms" />
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:baselineAligned="false"
+	        android:paddingBottom="5dp"
+	        android:orientation="horizontal" >
 
-		<ImageView
-		    android:id="@+id/imageView1"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_alignLeft="@+id/button1"
-		    android:layout_alignParentTop="true"
-		    android:contentDescription="@string/app_name"
-		    android:paddingLeft="25dp"
-		    android:paddingRight="25dp"
-		    android:src="@drawable/name" />
+	        <RelativeLayout
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" >
+	        </RelativeLayout>
+
+	        <RelativeLayout
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="5" >
+
+	            <Button
+	                android:id="@+id/button1"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:background="@drawable/button_normal"
+	                android:text="@string/remain_sms" />
+	        </RelativeLayout>
+
+	        <RelativeLayout
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" >
+	        </RelativeLayout>
+	    </LinearLayout>
+
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:baselineAligned="false"
+	        android:paddingBottom="5dp"
+	        android:orientation="horizontal" >
+
+	        <RelativeLayout
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" >
+	        </RelativeLayout>
+
+	        <RelativeLayout
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="5" >
+
+	            <Button
+	                android:id="@+id/button2"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:background="@drawable/button_normal"
+	                android:text="@string/invoice" />
+	        </RelativeLayout>
+
+	        <RelativeLayout
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" >
+	        </RelativeLayout>
+	    </LinearLayout>
+
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:baselineAligned="false"
+	        android:orientation="horizontal"
+	        android:paddingBottom="5dp" >
+
+	        <RelativeLayout
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" >
+	        </RelativeLayout>
+
+	        <RelativeLayout
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="5" >
+
+	            <Button
+	                android:id="@+id/button3"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:background="@drawable/button_normal"
+	                android:text="@string/transaction" />
+	        </RelativeLayout>
+
+	        <RelativeLayout
+	            android:layout_width="0dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" >
+	        </RelativeLayout>
+	    </LinearLayout>
+	</LinearLayout>
+
+	<ImageView
+	    android:id="@+id/imageView1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/linearLayout1"
+	    android:layout_alignParentTop="true"
+	    android:layout_marginTop="39dp"
+	    android:contentDescription="@string/app_name"
+	    android:paddingLeft="25dp"
+	    android:paddingRight="25dp"
+	    android:src="@drawable/name" />
 
 </RelativeLayout>

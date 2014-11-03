@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
 	        }
 			
 		}
-    	
+		
         btnSMS = (Button) findViewById(R.id.button1);
         btnOrder = (Button) findViewById(R.id.button2);
         btnTransaction = (Button) findViewById(R.id.button3);
@@ -86,21 +86,21 @@ public class MainActivity extends Activity {
         slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_select));
         slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_select));   
         slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_select)); 
-        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_message_bg)); 
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_normal)); 
     	btnSMS.setBackground(slDraw);
     	
     	slDraw = new StateListDrawable(); 
         slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_select));
         slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_select));   
         slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_select)); 
-        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_order));     	
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_normal));     	
     	btnOrder.setBackground(slDraw);
     	
     	slDraw = new StateListDrawable(); 
         slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_select));
         slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_select));   
         slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_select)); 
-        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_transaction)); 
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_normal)); 
     	btnTransaction.setBackground(slDraw);
         
         btnSMS.setOnClickListener(new OnClickListener() {
@@ -243,7 +243,6 @@ public class MainActivity extends Activity {
 			}
 			else if(auth.isLogin())
 			{
-				Toast.makeText(getApplicationContext(), auth.getLastSubmit(), 7000).show();
 				btnSMS.setVisibility(View.VISIBLE);
 				btnOrder.setVisibility(View.VISIBLE);
 				btnTransaction.setVisibility(View.VISIBLE);
