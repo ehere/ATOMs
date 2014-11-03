@@ -50,6 +50,7 @@
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:background="@drawable/button_normal"
+	                android:visibility="gone"
 	                android:text="@string/remain_sms" />
 	        </RelativeLayout>
 
@@ -83,6 +84,7 @@
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:background="@drawable/button_normal"
+	                android:visibility="gone"
 	                android:text="@string/invoice" />
 	        </RelativeLayout>
 
@@ -116,6 +118,7 @@
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
 	                android:background="@drawable/button_normal"
+	                android:visibility="gone"
 	                android:text="@string/transaction" />
 	        </RelativeLayout>
 
@@ -138,5 +141,13 @@
 	    android:paddingLeft="25dp"
 	    android:paddingRight="25dp"
 	    android:src="@drawable/name" />
+
+	<TextView
+	    android:id="@+id/error_message"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerHorizontal="true"
+	    android:layout_centerVertical="true"
+	    android:visibility="gone"/>
 
 </RelativeLayout>
