@@ -30,11 +30,12 @@ public final class R {
     public static final class drawable {
         public static final int background_color=0x7f020000;
         public static final int button_alert=0x7f020001;
-        public static final int button_normal=0x7f020002;
-        public static final int button_select=0x7f020003;
-        public static final int button_transaction=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int name=0x7f020006;
+        public static final int button_alert_clicked=0x7f020002;
+        public static final int button_normal=0x7f020003;
+        public static final int button_select=0x7f020004;
+        public static final int button_transaction=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int name=0x7f020007;
     }
     public static final class id {
         public static final int ColAmount=0x7f090014;
