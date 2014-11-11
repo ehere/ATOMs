@@ -110,7 +110,7 @@ public class MainActivity extends Activity {
         btnTransaction.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
+				Intent newActivity = new Intent(MainActivity.this,TransactionActivity.class);
 				startActivity(newActivity);
 				overridePendingTransition(R.animator.right_in, R.animator.left_out);
 			}

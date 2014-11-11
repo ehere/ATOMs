@@ -74,6 +74,8 @@ public final class R {
         public static final int activity_orderlist=0x7f030003;
         public static final int activity_orderlistcolumn=0x7f030004;
         public static final int activity_smsresend=0x7f030005;
+        public static final int activity_transaction=0x7f030006;
+        public static final int activity_transactioncolumn=0x7f030007;
     }
     public static final class menu {
         public static final int main=0x7f080000;
