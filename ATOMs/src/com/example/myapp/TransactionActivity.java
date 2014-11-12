@@ -118,7 +118,7 @@ public class TransactionActivity extends Activity
 	        	            builder1.setPositiveButton("Yes",
 	        	                    new DialogInterface.OnClickListener() {
 	        	                        public void onClick(DialogInterface dialog, int id) {
-	        	                            resendTask = new DialogBackgroud(4);
+	        	                            resendTask = new DialogBackgroud(2);
 	        	                            resendTask.execute((Void) null);
 	        	                        }
 	        	                    });
