@@ -41,8 +41,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class TransactionActivity extends Activity 
 {
 	private View mProgressView, transactionProgressView;
-	private TextView transactionID, transactionAmount, transactionStatus, transactionURLView;
-	private WebView myWebView;
+	private TextView transactionID, transactionAmount, transactionStatus;
 	private LinearLayout rowview;
 	private Background mAuthTask;
 	private ListView lisView1;
@@ -72,9 +71,6 @@ public class TransactionActivity extends Activity
         mAuthTask = new Background();
         mAuthTask.execute((Void) null);
         
-        myWebView = (WebView) findViewById(R.id.webview);
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
         
         
         lisView1 = (ListView)findViewById(R.id.listView1); 
@@ -89,7 +85,6 @@ public class TransactionActivity extends Activity
 				transactionAmount = (TextView) rowview.findViewById(R.id.ColAmount);
 				transactionStatus = (TextView) rowview.findViewById(R.id.ColStatus);
 				transactionProgressView = rowview.findViewById(R.id.order_progress);
-				transactionURLView = (TextView) rowview.findViewById(R.id.ColURL);
 				AlertDialog.Builder builder1 = new AlertDialog.Builder(TransactionActivity.this);
 	            builder1.setMessage(
 	            		Html.fromHtml("<b>Amount: </b>"+transactionAmount.getText()
@@ -147,21 +142,9 @@ public class TransactionActivity extends Activity
 		return true;
 	}
 	public void onBackPressed() {
-		if(myWebView.canGoBack())
-		{
-			myWebView.goBack();
-		}
-		else if(myWebView.getVisibility() == View.VISIBLE)
-		{
-			setVisible(myWebView, false);
-			setVisible(lisView1, true);
-		}
-		else
-		{
-			super.onBackPressed();
-	    	overridePendingTransition(R.animator.left_in, R.animator.right_out);
-	    	finish();
-		}
+		super.onBackPressed();
+	    overridePendingTransition(R.animator.left_in, R.animator.right_out);
+	    finish();
 	}
 	protected void onResume() {
 
@@ -183,20 +166,8 @@ public class TransactionActivity extends Activity
 		int id = item.getItemId();
 		if (id == android.R.id.home) 
 		{
-			if(myWebView.canGoBack())
-			{
-				myWebView.goBack();
-			}
-			else if(myWebView.getVisibility() == View.VISIBLE)
-			{
-				setVisible(myWebView, false);
-				setVisible(lisView1, true);
-			}
-			else
-			{
-				finish();
-				overridePendingTransition(R.animator.left_in, R.animator.right_out);
-			}
+			finish();
+			overridePendingTransition(R.animator.left_in, R.animator.right_out);
 	        return true;
 	    }
 		if (id == R.id.action_settings) 

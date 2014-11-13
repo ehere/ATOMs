@@ -53,18 +53,18 @@ public final class R {
         public static final int button1=0x7f09000d;
         public static final int button2=0x7f09000e;
         public static final int button3=0x7f09000f;
-        public static final int email_sign_in_button=0x7f09000c;
+        public static final int email_sign_in_button=0x7f09000b;
         public static final int error_message=0x7f090010;
-        public static final int imageView1=0x7f090006;
+        public static final int imageView1=0x7f09000c;
         public static final int linearLayout1=0x7f090000;
         public static final int listView1=0x7f090011;
-        public static final int login=0x7f09000b;
-        public static final int login_form=0x7f090008;
-        public static final int login_progress=0x7f090007;
+        public static final int login=0x7f09000a;
+        public static final int login_form=0x7f090007;
+        public static final int login_progress=0x7f090006;
         public static final int order_progress=0x7f090019;
-        public static final int password=0x7f09000a;
+        public static final int password=0x7f090009;
         public static final int resend_progress=0x7f090005;
-        public static final int username=0x7f090009;
+        public static final int username=0x7f090008;
         public static final int webview=0x7f090012;
     }
     public static final class layout {
@@ -102,7 +102,9 @@ public final class R {
         public static final int remain_sms=0x7f060009;
         public static final int time=0x7f060004;
         public static final int title_activity_login=0x7f06000c;
+        public static final int title_activity_orderlist=0x7f060016;
         public static final int title_activity_resendsms=0x7f060000;
+        public static final int title_activity_transaction=0x7f060017;
         public static final int transaction=0x7f06000a;
         /**  Strings related to login 
          */

@@ -61,7 +61,7 @@
         
         <activity
             android:name=".OrderListActivity"
-            android:label="@string/title_activity_login"
+            android:label="@string/title_activity_orderlist"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -70,7 +70,7 @@
         
         <activity
             android:name=".TransactionActivity"
-            android:label="@string/title_activity_login"
+            android:label="@string/title_activity_transaction"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
