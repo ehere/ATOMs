@@ -32,27 +32,32 @@ public final class R {
         public static final int button_alert=0x7f020001;
         public static final int button_alert_clicked=0x7f020002;
         public static final int button_normal=0x7f020003;
-        public static final int button_select=0x7f020004;
-        public static final int button_transaction=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int name=0x7f020007;
+        public static final int button_paginate_normal=0x7f020004;
+        public static final int button_paginate_select=0x7f020005;
+        public static final int button_select=0x7f020006;
+        public static final int button_transaction=0x7f020007;
+        public static final int ic_launcher=0x7f020008;
+        public static final int name=0x7f020009;
     }
     public static final class id {
-        public static final int ColAmount=0x7f090014;
+        public static final int ColAmount=0x7f090017;
         public static final int ColBankName=0x7f090002;
-        public static final int ColColor=0x7f090018;
+        public static final int ColColor=0x7f09001b;
         public static final int ColMessage=0x7f090003;
-        public static final int ColOrderID=0x7f090013;
-        public static final int ColRaw=0x7f090016;
-        public static final int ColStatus=0x7f090015;
+        public static final int ColOrderID=0x7f090016;
+        public static final int ColRaw=0x7f090019;
+        public static final int ColStatus=0x7f090018;
         public static final int ColTime=0x7f090004;
-        public static final int ColURL=0x7f090017;
+        public static final int ColURL=0x7f09001a;
         public static final int Value=0x7f090001;
-        public static final int action_logout=0x7f09001b;
-        public static final int action_settings=0x7f09001a;
+        public static final int action_logout=0x7f09001e;
+        public static final int action_settings=0x7f09001d;
         public static final int button1=0x7f09000d;
         public static final int button2=0x7f09000e;
         public static final int button3=0x7f09000f;
+        public static final int button_back=0x7f090013;
+        public static final int button_forward=0x7f090015;
+        public static final int editTextSkipto=0x7f090014;
         public static final int email_sign_in_button=0x7f09000b;
         public static final int error_message=0x7f090010;
         public static final int imageView1=0x7f09000c;
@@ -61,7 +66,7 @@ public final class R {
         public static final int login=0x7f09000a;
         public static final int login_form=0x7f090007;
         public static final int login_progress=0x7f090006;
-        public static final int order_progress=0x7f090019;
+        public static final int order_progress=0x7f09001c;
         public static final int password=0x7f090009;
         public static final int resend_progress=0x7f090005;
         public static final int username=0x7f090008;
@@ -86,14 +91,19 @@ public final class R {
         public static final int action_sign_in=0x7f06000f;
         public static final int action_sign_in_short=0x7f060010;
         public static final int app_name=0x7f060005;
+        /**  Strings related to Order list 
+         */
+        public static final int back=0x7f060017;
         public static final int bankname=0x7f060002;
         public static final int error_field_required=0x7f060014;
         public static final int error_incorrect_password=0x7f060013;
         public static final int error_invalid_email=0x7f060011;
         public static final int error_invalid_password=0x7f060012;
         public static final int error_no_connection=0x7f060015;
+        public static final int forword=0x7f060018;
         public static final int hello_world=0x7f060006;
         public static final int invoice=0x7f06000b;
+        public static final int jumpto=0x7f060019;
         public static final int message=0x7f060003;
         /**  Strings related to login 
          */
@@ -104,7 +114,7 @@ public final class R {
         public static final int title_activity_login=0x7f06000c;
         public static final int title_activity_orderlist=0x7f060016;
         public static final int title_activity_resendsms=0x7f060000;
-        public static final int title_activity_transaction=0x7f060017;
+        public static final int title_activity_transaction=0x7f06001a;
         public static final int transaction=0x7f06000a;
         /**  Strings related to login 
          */

@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,21 +27,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.view.KeyEvent;
 
 @SuppressLint({ "ShowToast", "SetJavaScriptEnabled" })
 public class OrderListActivity extends Activity 
 {
 	private View mProgressView, orderProgressView;
-	private TextView orderID, orderAmount, orderStatus, orderURLView;
+	private TextView orderID, orderAmount, orderStatus, orderURLView, error;
+	private EditText editSkipto;
+	private Button btnBack, btnForword;
 	private WebView myWebView;
 	private LinearLayout rowview;
 	private Background mAuthTask;
@@ -48,8 +55,7 @@ public class OrderListActivity extends Activity
 	private DialogBackgroud resendTask;
 	private ArrayList<HashMap<String, String>> MyArrList;
 	private SpecialAdapter sAdap;
-	private int row;
-	private TextView error;
+	private int row, page = 1, totalpage;
 	private boolean oncreate = true;
 	
 	@Override
@@ -57,7 +63,8 @@ public class OrderListActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_orderlist);
-		
+		btnBack = (Button) findViewById(R.id.button_back);
+		btnForword = (Button) findViewById(R.id.button_forward);		
 		mProgressView = findViewById(R.id.login_progress);  
 		error = (TextView) findViewById(R.id.error_message);
         error.setOnClickListener(new OnClickListener() {
@@ -66,8 +73,26 @@ public class OrderListActivity extends Activity
 				onResume();
 			}
 		});		
-		
-		
+        editSkipto = (EditText) findViewById(R.id.editTextSkipto);		
+        editSkipto.setOnKeyListener(new OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+            	if(!editSkipto.getText().toString().equals("") && Integer.parseInt(editSkipto.getText().toString()) <= totalpage)
+            	{
+	                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) 
+	                {
+	                	page = Integer.parseInt(editSkipto.getText().toString());
+	                	onResume();
+	                	return true;
+	                }
+            	}
+            	else if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER))
+            	{
+            		Toast.makeText(getApplicationContext(), "Max page is "+totalpage, 7000).show();
+            	}
+                return false;
+            }
+        });
         mAuthTask = new Background();
         mAuthTask.execute((Void) null);
         
@@ -75,14 +100,61 @@ public class OrderListActivity extends Activity
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         
-        
+        StateListDrawable slDraw = new StateListDrawable(); 
+        slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_paginate_select));
+        slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_paginate_select));   
+        slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_paginate_select)); 
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_paginate_normal)); 
+        btnBack.setBackground(slDraw);
+    	
+    	slDraw = new StateListDrawable(); 
+        slDraw.addState(new int[] {android.R.attr.state_focused},  getResources().getDrawable(R.drawable.button_paginate_select));
+        slDraw.addState(new int[] {android.R.attr.state_selected},  getResources().getDrawable(R.drawable.button_paginate_select));   
+        slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_paginate_select)); 
+        slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_paginate_normal));     	
+        btnForword.setBackground(slDraw); 
+        if(page == totalpage)
+        {
+        	btnForword.setText("");       
+        }  
+        else
+        {
+        	btnForword.setText("Page "+(page+1));
+        }
+        if(page == 1)
+        {
+        	btnBack.setText("");       
+        }
+        else
+        {
+        	btnBack.setText("Page "+(page-1));   
+        }
+        btnBack.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if(page > 1)
+				{
+					page = page -1;
+					onResume();
+				}
+			}
+		});
+        btnForword.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if(page != totalpage)
+				{
+					page = page + 1;
+					onResume();
+				}
+			}
+		});        
         lisView1 = (ListView)findViewById(R.id.listView1); 
 		lisView1.setTextFilterEnabled(true);	
 		lisView1.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				row = position;
-				// When clicked, show a toast with the TextView text
 				rowview = (LinearLayout) view; // get the parent layout view
 				orderID = (TextView) rowview.findViewById(R.id.ColOrderID);
 				orderAmount = (TextView) rowview.findViewById(R.id.ColAmount);
@@ -303,7 +375,8 @@ public class OrderListActivity extends Activity
 		        FileManager tokenFile = new FileManager("token", getBaseContext());
 		        ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 		        params.add(new BasicNameValuePair("token", tokenFile.read()));
-		        
+		        params.add(new BasicNameValuePair("page", Integer.toString(page)));
+
 				MyArrList = new ArrayList<HashMap<String, String>>();
 				HashMap<String, String> map;
 				
@@ -321,6 +394,7 @@ public class OrderListActivity extends Activity
         				int status = result.getInt("success");
         				if(status == 1)
         				{
+        					totalpage = result.getInt("totalpage");
         					JSONArray orders = result.getJSONArray("order");
         					for (int i = 0; i < orders.length(); i++) {
         						JSONObject order = orders.getJSONObject(i);
@@ -503,26 +577,22 @@ public class OrderListActivity extends Activity
 			}
 			else
 			{
-				if(mode == 1)
+				if(mode >= 1 && mode < 4)
 				{
-					orderStatus.setText("Paid");
-					rowview.setBackgroundColor(Color.parseColor("#47FF6C"));
-					setVisible(orderID, true);
-					setVisible(orderAmount, true);
-					setVisible(orderStatus, true);
-				}
-				else if(mode == 2)
-				{
-					orderStatus.setText("Not Paid");
-					rowview.setBackgroundColor(Color.parseColor("#FFB45E"));
-					setVisible(orderID, true);
-					setVisible(orderAmount, true);
-					setVisible(orderStatus, true);
-				}
-				else if(mode == 3)
-				{
-					orderStatus.setText("Shipped");
-					rowview.setBackgroundColor(Color.parseColor("#47D7FF"));
+					String[] status = {"Paid", "Not Paid", "Shipped"};
+					String[] color = {"#47FF6C", "#FFB45E", "#47D7FF"};
+					for (HashMap<String, String> map : MyArrList)
+				    {
+				        if(map.get("ID").equals(orderID.getText()))
+				        {
+				       		map.put("Status", status[mode-1]);
+				       		map.put("Color", color[mode-1]);
+				            break;
+				        }
+				        sAdap = new SpecialAdapter(OrderListActivity.this, MyArrList, R.layout.activity_orderlistcolumn,
+				                new String[] {"ID", "Amount", "Status", "rawStatus", "URL", "Color"}, new int[] {R.id.ColOrderID, R.id.ColAmount, R.id.ColStatus, R.id.ColRaw, R.id.ColURL, R.id.ColColor});      
+				        lisView1.setAdapter(sAdap);
+				    }
 					setVisible(orderID, true);
 					setVisible(orderAmount, true);
 					setVisible(orderStatus, true);
