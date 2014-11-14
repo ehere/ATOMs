@@ -23,7 +23,7 @@
 		android:id="@+id/ColBankName" 
 		android:layout_width="0dp"
 		android:layout_height="wrap_content" 
-		android:layout_weight="1"
+		android:layout_weight="2"
 		android:text="@string/bankname"/>
 
 	<TextView
@@ -38,10 +38,10 @@
 	    android:id="@+id/ColTime"
 	    android:layout_width="0dp"
 	    android:layout_height="wrap_content"
-	    android:layout_weight="1"
+	    android:layout_weight="0"
 	    android:paddingLeft="@dimen/activity_horizontal_margin"
 	    android:paddingRight="@dimen/activity_horizontal_margin"
-	    android:visibility="visible"
+	    android:visibility="gone"
 	    android:text="@string/time" />
 
     <ProgressBar

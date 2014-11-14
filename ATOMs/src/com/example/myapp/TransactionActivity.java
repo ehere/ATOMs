@@ -281,6 +281,7 @@ public class TransactionActivity extends Activity
         						JSONObject transaction = transactions.getJSONObject(i);
         						map = new HashMap<String, String>();
         						map.put("ID", transaction.getString("id"));
+        						map.put("Bank", transaction.getString("bank"));
         				       	map.put("Amount", "ß" + transaction.getString("money"));
         				       	map.put("rawStatus", transaction.getString("status"));
         				       	map.put("URL", "");
@@ -310,7 +311,7 @@ public class TransactionActivity extends Activity
         		}
 		        
 		        sAdap = new SpecialAdapter(TransactionActivity.this, MyArrList, R.layout.activity_transactioncolumn,
-		                new String[] {"ID", "Amount", "Status", "rawStatus", "URL", "Color"}, new int[] {R.id.ColOrderID, R.id.ColAmount, R.id.ColStatus, R.id.ColRaw, R.id.ColURL, R.id.ColColor});      
+		                new String[] {"ID", "Bank", "Amount", "Status", "rawStatus", "URL", "Color"}, new int[] {R.id.ColOrderID, R.id.ColBank, R.id.ColAmount, R.id.ColStatus, R.id.ColRaw, R.id.ColURL, R.id.ColColor});      
 		        lisView1.setAdapter(sAdap);
 			}
 			else

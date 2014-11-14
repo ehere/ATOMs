@@ -76,14 +76,13 @@ public class SMSResendActivity extends Activity
 				resendProgressView = ll.findViewById(R.id.resend_progress);
 				row = position;
 				AlertDialog.Builder builder1 = new AlertDialog.Builder(SMSResendActivity.this);
+				builder1.setTitle("Resend Message");
 	            builder1.setMessage(
-	            		"id: "+value.getText()
-	            		+"\nส่งข้อความนี้ขึ้น Server อีกครั้งหรือนำออกจากรายการ\n"
-	            		+ "\nส่งจาก: "+tvBankName.getText()
-	            		+ "\nข้อความ: "+tvMessage.getText()
-	            		+ "\nส่งเมื่อ: "+tvTime.getText());
+	            		"From: \t"+tvBankName.getText()
+	            		+ "\nMessage: \t"+tvMessage.getText()
+	            		+ "\nTime: \t"+tvTime.getText());
 	            builder1.setCancelable(true);
-	            builder1.setPositiveButton("ส่งใหม่",
+	            builder1.setPositiveButton("Resend",
 	                    new DialogInterface.OnClickListener() {
 	                        public void onClick(DialogInterface dialog, int id) {
 	                            resendTask = new DialogBackgroud(0);
@@ -92,7 +91,7 @@ public class SMSResendActivity extends Activity
 	                        }
 	                    });
 
-	            builder1.setNeutralButton("ลบออก",
+	            builder1.setNeutralButton("Delete",
 	                    new DialogInterface.OnClickListener() {
 	                        public void onClick(DialogInterface dialog, int id) {
 	                        	resendTask = new DialogBackgroud(1);
@@ -100,7 +99,7 @@ public class SMSResendActivity extends Activity
 	                        }
 	                    });
 
-	            builder1.setNegativeButton("ยกเลิก",
+	            builder1.setNegativeButton("Cancel",
 	                    new DialogInterface.OnClickListener() {
 	                        public void onClick(DialogInterface dialog, int id) {
 	                            dialog.cancel();
