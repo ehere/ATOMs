@@ -89,31 +89,29 @@ public final class R {
     public static final class string {
         public static final int action_logout=0x7f060008;
         public static final int action_settings=0x7f060007;
-        public static final int action_sign_in=0x7f06000f;
-        public static final int action_sign_in_short=0x7f060010;
+        public static final int action_sign_in=0x7f060012;
+        public static final int action_sign_in_short=0x7f060013;
         public static final int app_name=0x7f060005;
-        /**  Strings related to Order list 
-         */
-        public static final int back=0x7f060017;
+        public static final int back=0x7f06000c;
         public static final int bankname=0x7f060002;
-        public static final int error_field_required=0x7f060014;
-        public static final int error_incorrect_password=0x7f060013;
-        public static final int error_invalid_email=0x7f060011;
-        public static final int error_invalid_password=0x7f060012;
-        public static final int error_no_connection=0x7f060015;
-        public static final int forword=0x7f060018;
+        public static final int error_field_required=0x7f060017;
+        public static final int error_incorrect_password=0x7f060016;
+        public static final int error_invalid_email=0x7f060014;
+        public static final int error_invalid_password=0x7f060015;
+        public static final int error_no_connection=0x7f060018;
+        public static final int forword=0x7f06000d;
         public static final int hello_world=0x7f060006;
         public static final int invoice=0x7f06000b;
-        public static final int jumpto=0x7f060019;
+        public static final int jumpto=0x7f06000e;
         public static final int message=0x7f060003;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f06000d;
-        public static final int prompt_password=0x7f06000e;
+        public static final int prompt_email=0x7f060010;
+        public static final int prompt_password=0x7f060011;
         public static final int remain_sms=0x7f060009;
         public static final int time=0x7f060004;
-        public static final int title_activity_login=0x7f06000c;
-        public static final int title_activity_orderlist=0x7f060016;
+        public static final int title_activity_login=0x7f06000f;
+        public static final int title_activity_orderlist=0x7f060019;
         public static final int title_activity_resendsms=0x7f060000;
         public static final int title_activity_transaction=0x7f06001a;
         public static final int transaction=0x7f06000a;

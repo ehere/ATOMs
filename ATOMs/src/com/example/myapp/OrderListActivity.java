@@ -17,6 +17,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -587,11 +588,16 @@ public class OrderListActivity extends Activity
 				        {
 				       		map.put("Status", status[mode-1]);
 				       		map.put("Color", color[mode-1]);
+				       		orderStatus.setText(status[mode-1]);
+				       		rowview.setBackgroundColor(Color.parseColor(color[mode-1]));
 				            break;
 				        }
 				        sAdap = new SpecialAdapter(OrderListActivity.this, MyArrList, R.layout.activity_orderlistcolumn,
 				                new String[] {"ID", "Amount", "Status", "rawStatus", "URL", "Color"}, new int[] {R.id.ColOrderID, R.id.ColAmount, R.id.ColStatus, R.id.ColRaw, R.id.ColURL, R.id.ColColor});      
 				        lisView1.setAdapter(sAdap);
+				        sAdap.notifyDataSetChanged();
+				        lisView1.invalidateViews();
+				        lisView1.refreshDrawableState();
 				    }
 					setVisible(orderID, true);
 					setVisible(orderAmount, true);

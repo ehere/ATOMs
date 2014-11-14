@@ -3,9 +3,7 @@
     <string name="title_activity_orderlist">Order list</string>
 
     <!-- Strings related to Order list -->
-    <string name="back">Prev. Page</string>
-    <string name="forword">Next Page</string>
-    <string name="jumpto">Go to</string>
+
 
 
 </resources>

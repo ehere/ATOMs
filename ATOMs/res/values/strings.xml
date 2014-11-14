@@ -8,6 +8,8 @@
     <string name="remain_sms">SMS Not send !</string>
     <string name="transaction">Transactions</string>
     <string name="invoice">Order List</string>
-    
+    <string name="back">Prev. Page</string>
+    <string name="forword">Next Page</string>
+    <string name="jumpto">Go to page?</string>
 
 </resources>

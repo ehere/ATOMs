@@ -42,7 +42,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class TransactionActivity extends Activity 
 {
 	private View mProgressView, transactionProgressView;
-	private TextView transactionID, transactionAmount, transactionStatus;
+	private TextView transactionID, transactionAmount, transactionStatus, transactionBank;
 	private EditText editSkipto;
 	private LinearLayout rowview;
 	private Background mAuthTask;
@@ -144,6 +144,7 @@ public class TransactionActivity extends Activity
 				transactionID = (TextView) rowview.findViewById(R.id.ColOrderID);
 				transactionAmount = (TextView) rowview.findViewById(R.id.ColAmount);
 				transactionStatus = (TextView) rowview.findViewById(R.id.ColStatus);
+				transactionBank = (TextView) rowview.findViewById(R.id.ColBank);
 				transactionProgressView = rowview.findViewById(R.id.order_progress);
 				AlertDialog.Builder builder1 = new AlertDialog.Builder(TransactionActivity.this);
 	            builder1.setMessage(
@@ -418,9 +419,10 @@ public class TransactionActivity extends Activity
 		DialogBackgroud(int mode) {
 			this.mode = mode;
 			setVisible(transactionProgressView, true);
+			setVisible(transactionStatus, false);
 			setVisible(transactionID, false);
 			setVisible(transactionAmount, false);
-			setVisible(transactionStatus, false);
+			setVisible(transactionBank, false);
 		}
 		
 
@@ -508,6 +510,7 @@ public class TransactionActivity extends Activity
 					error.setText("No Internet Connection.\n       Click to refresh.");
 					setVisible(error, true);
 					setVisible(transactionID, true);
+					setVisible(transactionBank, true);
 					setVisible(transactionAmount, true);
 					setVisible(transactionStatus, true);
 				}
@@ -516,6 +519,7 @@ public class TransactionActivity extends Activity
 					Toast.makeText(getApplicationContext(), message, 7000).show();
 					setVisible(transactionID, true);
 					setVisible(transactionAmount, true);
+					setVisible(transactionBank, true);
 					setVisible(transactionStatus, true);
 				}
 				else
@@ -532,22 +536,30 @@ public class TransactionActivity extends Activity
 				if(mode == 0 || mode == 1)
 				{
 					String[] status = {"Used", "Unused"};
-					String[] color = {"#47FF6C", "#FFB45E", "#47D7FF"};
+					String[] color = {"#47FF6C", "#FFB45E"};
 					for (HashMap<String, String> map : MyArrList)
 				    {
 				        if(map.get("ID").equals(transactionID.getText()))
 				        {
 				       		map.put("Status", status[mode]);
 				       		map.put("Color", color[mode]);
+				       		transactionStatus.setText(status[mode]);
+				       		rowview.setBackgroundColor(Color.parseColor(color[mode]));
 				            break;
 				        }
+				        
 				        sAdap = new SpecialAdapter(TransactionActivity.this, MyArrList, R.layout.activity_transactioncolumn,
 				                new String[] {"ID", "Bank", "Amount", "Status", "rawStatus", "URL", "Color"}, new int[] {R.id.ColOrderID, R.id.ColBank, R.id.ColAmount, R.id.ColStatus, R.id.ColRaw, R.id.ColURL, R.id.ColColor});      
 				        lisView1.setAdapter(sAdap);
+				        sAdap.notifyDataSetChanged();
+				        lisView1.invalidateViews();
+				        lisView1.refreshDrawableState();
+
 				    }
 					setVisible(transactionID, true);
 					setVisible(transactionAmount, true);
 					setVisible(transactionStatus, true);
+					setVisible(transactionBank, true);
 				}
 				else if(mode == 2)
 				{
