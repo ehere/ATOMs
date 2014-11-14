@@ -17,7 +17,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -113,22 +112,7 @@ public class OrderListActivity extends Activity
         slDraw.addState(new int[] {android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.button_paginate_select)); 
         slDraw.addState(new int[] {}, getResources().getDrawable(R.drawable.button_paginate_normal));     	
         btnForword.setBackground(slDraw); 
-        if(page == totalpage)
-        {
-        	btnForword.setText("");       
-        }  
-        else
-        {
-        	btnForword.setText("Page "+(page+1));
-        }
-        if(page == 1)
-        {
-        	btnBack.setText("");       
-        }
-        else
-        {
-        	btnBack.setText("Page "+(page-1));   
-        }
+
         btnBack.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -395,6 +379,22 @@ public class OrderListActivity extends Activity
         				if(status == 1)
         				{
         					totalpage = result.getInt("totalpage");
+        			        if(page == totalpage)
+        			        {
+        			        	btnForword.setText("");       
+        			        }  
+        			        else
+        			        {
+        			        	btnForword.setText("Page "+(page+1));
+        			        }
+        			        if(page == 1)
+        			        {
+        			        	btnBack.setText("");       
+        			        }
+        			        else
+        			        {
+        			        	btnBack.setText("Page "+(page-1));   
+        			        }
         					JSONArray orders = result.getJSONArray("order");
         					for (int i = 0; i < orders.length(); i++) {
         						JSONObject order = orders.getJSONObject(i);

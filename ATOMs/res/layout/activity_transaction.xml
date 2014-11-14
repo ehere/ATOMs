@@ -10,6 +10,8 @@
     android:paddingTop="0dp"
     android:screenOrientation="portrait"
     android:background="@drawable/background_color"
+    android:descendantFocusability="beforeDescendants"
+  	android:focusableInTouchMode="true"
     tools:context="com.example.myapp.TransactionActivity" >
 
     <ProgressBar
@@ -25,6 +27,7 @@
 	    android:id="@+id/listView1"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" 
+	    android:paddingBottom="40dp"
 	    android:visibility="gone">
 
 	</ListView>
@@ -35,6 +38,93 @@
 	    android:layout_centerHorizontal="true"
 	    android:layout_centerVertical="true"
 	    android:visibility="gone"/>
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_alignParentBottom="true"
+	    android:layout_margin="0dp"
+    	android:paddingBottom="0dp"
+    	android:paddingLeft="0dp"
+    	android:paddingRight="0dp"
+    	android:paddingTop="0dp"
+    	android:layout_height="40dp"
+	    android:orientation="vertical"
+	    android:background="#000000"
+	    android:id="@+id/linearLayout1">
 
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:baselineAligned="false"
+		    android:orientation="horizontal"
+		    android:layout_margin="0dp"
+    		android:paddingBottom="0dp"
+    		android:paddingLeft="0dp"
+    		android:paddingRight="0dp"
+    		android:paddingTop="0dp" >
+
+		    <RelativeLayout
+		        android:layout_width="0dp"
+		        android:layout_height="match_parent"
+		        android:layout_weight="1" 
+		        android:layout_margin="0dp"
+			    android:paddingBottom="0dp"
+			    android:paddingLeft="0dp"
+			    android:paddingRight="0dp"
+			    android:paddingTop="0dp">
+
+				<Button
+					android:id="@+id/button_back"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:text="@string/back"
+					android:textColor="#FFFFFF"
+					android:background="@drawable/button_paginate_normal"
+				/>
+		    </RelativeLayout>
+
+		    <RelativeLayout
+		        android:layout_width="0dp"
+		        android:layout_height="match_parent"
+		        android:paddingBottom="0dp"
+    			android:paddingLeft="0dp"
+    			android:paddingRight="0dp"
+    			android:paddingTop="0dp"
+    			android:background="#ffffff"
+		        android:layout_weight="1" >
+
+		        <EditText
+		            android:id="@+id/editTextSkipto"
+		            android:layout_width="match_parent"
+		            android:layout_height="match_parent"
+		            android:inputType="number"
+		            android:hint="@string/jumpto"
+		            android:paddingBottom="0dp"
+    				android:paddingLeft="0dp"
+    				android:paddingRight="0dp"
+    				android:paddingTop="0dp"
+    				android:gravity="center"
+		            android:labelFor="@+id/editTextSkipto" />
+		    </RelativeLayout>
+
+		    <RelativeLayout
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:paddingBottom="0dp"
+    			android:paddingLeft="0dp"
+    			android:paddingRight="0dp"
+    			android:paddingTop="0dp"
+		        android:layout_weight="1" >
+				<Button
+					android:id="@+id/button_forward"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:text="@string/forword"
+					android:textColor="#FFFFFF"
+					android:background="@drawable/button_paginate_normal"
+				/>
+		    </RelativeLayout>
+		</LinearLayout>
+
+	</LinearLayout>
 
 </RelativeLayout>
