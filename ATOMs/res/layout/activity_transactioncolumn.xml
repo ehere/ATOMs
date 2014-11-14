@@ -18,6 +18,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:visibility="gone"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:text="ID" />
@@ -26,7 +27,8 @@
         android:id="@+id/ColBank"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="1"
+        android:gravity="center"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:text="Bank" />
@@ -35,7 +37,8 @@
         android:id="@+id/ColAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="1"
+        android:gravity="center"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:text="Amount" />
@@ -44,29 +47,23 @@
         android:id="@+id/ColStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="0"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
+        android:visibility="gone"
         android:text="Status" />
     
     <TextView
-        android:id="@+id/ColRaw"
+        android:id="@+id/ColTransferDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
+        android:layout_weight="2"
+        android:gravity="center"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:visibility="gone"
+        
         android:text="Status" />
-    <TextView
-        android:id="@+id/ColURL"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:visibility="gone"
-        android:text="URL" />
+
     <TextView
         android:id="@+id/ColColor"
         android:layout_width="0dp"

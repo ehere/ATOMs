@@ -42,7 +42,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class TransactionActivity extends Activity 
 {
 	private View mProgressView, transactionProgressView;
-	private TextView transactionID, transactionAmount, transactionStatus, transactionBank;
+	private TextView transactionID, transactionAmount, transactionStatus, transactionBank, transactionTransferDate;
 	private EditText editSkipto;
 	private LinearLayout rowview;
 	private Background mAuthTask;
@@ -145,6 +145,7 @@ public class TransactionActivity extends Activity
 				transactionAmount = (TextView) rowview.findViewById(R.id.ColAmount);
 				transactionStatus = (TextView) rowview.findViewById(R.id.ColStatus);
 				transactionBank = (TextView) rowview.findViewById(R.id.ColBank);
+				transactionTransferDate = (TextView) rowview.findViewById(R.id.ColTransferDate);
 				transactionProgressView = rowview.findViewById(R.id.order_progress);
 				AlertDialog.Builder builder1 = new AlertDialog.Builder(TransactionActivity.this);
 	            builder1.setMessage(
@@ -368,8 +369,7 @@ public class TransactionActivity extends Activity
         						map.put("ID", transaction.getString("id"));
         						map.put("Bank", transaction.getString("bank"));
         				       	map.put("Amount", "ß" + transaction.getString("money"));
-        				       	map.put("rawStatus", transaction.getString("status"));
-        				       	map.put("URL", "");
+        				       	map.put("TransferDate", transaction.getString("created_at"));
         				       	if(transaction.getString("status").equals("0")){
         				       		//not paid
         				       		map.put("Status", "Unused");
@@ -396,7 +396,7 @@ public class TransactionActivity extends Activity
         		}
 		        
 		        sAdap = new SpecialAdapter(TransactionActivity.this, MyArrList, R.layout.activity_transactioncolumn,
-		                new String[] {"ID", "Bank", "Amount", "Status", "rawStatus", "URL", "Color"}, new int[] {R.id.ColOrderID, R.id.ColBank, R.id.ColAmount, R.id.ColStatus, R.id.ColRaw, R.id.ColURL, R.id.ColColor});      
+		                new String[] {"ID", "Bank", "Amount", "Status", "TransferDate", "Color"}, new int[] {R.id.ColOrderID, R.id.ColBank, R.id.ColAmount, R.id.ColStatus, R.id.ColTransferDate, R.id.ColColor});      
 		        lisView1.setAdapter(sAdap);
 			}
 			else
@@ -420,7 +420,7 @@ public class TransactionActivity extends Activity
 			this.mode = mode;
 			setVisible(transactionProgressView, true);
 			setVisible(transactionStatus, false);
-			setVisible(transactionID, false);
+			setVisible(transactionTransferDate, false);
 			setVisible(transactionAmount, false);
 			setVisible(transactionBank, false);
 		}
@@ -509,18 +509,16 @@ public class TransactionActivity extends Activity
 				{
 					error.setText("No Internet Connection.\n       Click to refresh.");
 					setVisible(error, true);
-					setVisible(transactionID, true);
+					setVisible(transactionTransferDate, true);
 					setVisible(transactionBank, true);
 					setVisible(transactionAmount, true);
-					setVisible(transactionStatus, true);
 				}
 				else if(auth.isLogin())
 				{
 					Toast.makeText(getApplicationContext(), message, 7000).show();
-					setVisible(transactionID, true);
+					setVisible(transactionTransferDate, true);
 					setVisible(transactionAmount, true);
 					setVisible(transactionBank, true);
-					setVisible(transactionStatus, true);
 				}
 				else
 				{
@@ -549,16 +547,15 @@ public class TransactionActivity extends Activity
 				        }
 				        
 				        sAdap = new SpecialAdapter(TransactionActivity.this, MyArrList, R.layout.activity_transactioncolumn,
-				                new String[] {"ID", "Bank", "Amount", "Status", "rawStatus", "URL", "Color"}, new int[] {R.id.ColOrderID, R.id.ColBank, R.id.ColAmount, R.id.ColStatus, R.id.ColRaw, R.id.ColURL, R.id.ColColor});      
+				                new String[] {"ID", "Bank", "Amount", "Status", "TransferDate", "Color"}, new int[] {R.id.ColOrderID, R.id.ColBank, R.id.ColAmount, R.id.ColStatus, R.id.ColTransferDate, R.id.ColColor});      
 				        lisView1.setAdapter(sAdap);
 				        sAdap.notifyDataSetChanged();
 				        lisView1.invalidateViews();
 				        lisView1.refreshDrawableState();
 
 				    }
-					setVisible(transactionID, true);
+					setVisible(transactionTransferDate, true);
 					setVisible(transactionAmount, true);
-					setVisible(transactionStatus, true);
 					setVisible(transactionBank, true);
 				}
 				else if(mode == 2)
