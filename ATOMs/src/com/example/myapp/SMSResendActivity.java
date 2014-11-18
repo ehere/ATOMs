@@ -9,6 +9,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.myapp.TransactionActivity.DialogBackgroud;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
@@ -94,8 +96,27 @@ public class SMSResendActivity extends Activity
 	            builder1.setNeutralButton("Delete",
 	                    new DialogInterface.OnClickListener() {
 	                        public void onClick(DialogInterface dialog, int id) {
-	                        	resendTask = new DialogBackgroud(1);
-		                        resendTask.execute((Void) null);
+		        	            AlertDialog.Builder builder2 = new AlertDialog.Builder(SMSResendActivity.this);
+		        	            builder2.setTitle("Are You Sure?");
+		        	            builder2.setMessage("Are you sure to remove this message from unsend list?");
+		        	            builder2.setCancelable(true);
+		        	            builder2.setPositiveButton("Yes",
+		        	                    new DialogInterface.OnClickListener() {
+		        	                        public void onClick(DialogInterface dialog, int id) {
+		        	                        	resendTask = new DialogBackgroud(1);
+		        		                        resendTask.execute((Void) null);
+		        	                        }
+		        	                    });
+
+		        	            builder2.setNegativeButton("Cancel",
+		        	                    new DialogInterface.OnClickListener() {
+		        	                        public void onClick(DialogInterface dialog, int id) {
+		        	                        	dialog.cancel();
+		        	                        }
+		        	                    });
+		        	            AlertDialog alert = builder2.create();
+		        	            alert.show();
+
 	                        }
 	                    });
 
