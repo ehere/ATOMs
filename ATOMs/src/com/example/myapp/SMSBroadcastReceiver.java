@@ -62,8 +62,7 @@ public class SMSBroadcastReceiver extends BroadcastReceiver
                     
                     boolean found = false;
                     for (String number : listnumber) {
-                    	Toast.makeText(context, number, 7000).show();
-                        if (number.equals(sender)) { // Or use an accessor function for `nomeParagem` if appropriate
+                        if (number.equals(sender)) { 
                             found = true;
                             break;
                         }
