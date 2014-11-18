@@ -22,7 +22,6 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -77,7 +76,7 @@ public class OrderListActivity extends Activity
         editSkipto.setOnKeyListener(new OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 // If the event is a key-down event on the "enter" button
-            	if(!editSkipto.getText().toString().equals("") && Integer.parseInt(editSkipto.getText().toString()) <= totalpage)
+            	if(!editSkipto.getText().toString().equals("") && Integer.parseInt(editSkipto.getText().toString()) <= totalpage && Integer.parseInt(editSkipto.getText().toString()) > 0)
             	{
 	                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) 
 	                {
