@@ -268,11 +268,7 @@ public class OrderListActivity extends Activity
 			}
 	        return true;
 	    }
-		if (id == R.id.action_settings) 
-		{
-			return true;
-		}
-		else if(id == R.id.action_logout)
+		if(id == R.id.action_logout)
 		{
 			Authenticate auth = new Authenticate(this);
 			if(!auth.isConnect())

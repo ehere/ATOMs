@@ -154,10 +154,6 @@ public class SMSResendActivity extends Activity
 			overridePendingTransition(R.animator.left_in, R.animator.right_out);
 	        return true;
 	    }
-		if (id == R.id.action_settings) 
-		{
-			return true;
-		}
 		else if(id == R.id.action_logout)
 		{
 			Authenticate auth = new Authenticate(this);
