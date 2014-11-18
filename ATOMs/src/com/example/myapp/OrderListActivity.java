@@ -146,18 +146,12 @@ public class OrderListActivity extends Activity
 				orderStatus = (TextView) rowview.findViewById(R.id.ColStatus);
 				orderProgressView = rowview.findViewById(R.id.order_progress);
 				orderURLView = (TextView) rowview.findViewById(R.id.ColURL);
-				AlertDialog.Builder builder1 = new AlertDialog.Builder(OrderListActivity.this);
-	            builder1.setMessage(
-	            		Html.fromHtml("<b>Amount: </b>"+orderAmount.getText()
-	            				+"<br /><b>Status: </b>"+orderStatus.getText()));
-	            
-	            builder1.setCancelable(true);
-	            builder1.setTitle("Order #"+orderID.getText());
 	            
 	            final CharSequence[] items = {"Open Invoice", "Mark as Paid", "Mark as Not Paid", "Mark as Shipped", "Delete", "Cancel"};
 
 	            AlertDialog.Builder builder = new AlertDialog.Builder(OrderListActivity.this);
-	            builder.setTitle("Make your selection");
+	            builder.setTitle("Order #"+orderID.getText());
+	            builder.setCancelable(true);
 	            builder.setItems(items, new DialogInterface.OnClickListener() {
 	                public void onClick(DialogInterface dialog, int item) {
 	                	if(item == 0)
@@ -397,7 +391,7 @@ public class OrderListActivity extends Activity
         						JSONObject order = orders.getJSONObject(i);
         						map = new HashMap<String, String>();
         						map.put("ID", order.getString("id"));
-        				       	map.put("Amount", "ß" + order.getString("money"));
+        				       	map.put("Amount", "ß" + String.format("%.2f",order.getDouble("money")));
         				       	map.put("rawStatus", order.getString("status"));
         				       	map.put("URL", order.getString("url"));
         				       	if(order.getString("status").equals("0")){

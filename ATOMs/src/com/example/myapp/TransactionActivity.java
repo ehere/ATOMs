@@ -147,18 +147,12 @@ public class TransactionActivity extends Activity
 				transactionBank = (TextView) rowview.findViewById(R.id.ColBank);
 				transactionTransferDate = (TextView) rowview.findViewById(R.id.ColTransferDate);
 				transactionProgressView = rowview.findViewById(R.id.order_progress);
-				AlertDialog.Builder builder1 = new AlertDialog.Builder(TransactionActivity.this);
-	            builder1.setMessage(
-	            		Html.fromHtml("<b>Amount: </b>"+transactionAmount.getText()
-	            				+"<br /><b>Status: </b>"+transactionStatus.getText()));
-	            
-	            builder1.setCancelable(true);
-	            builder1.setTitle("transaction #"+transactionID.getText());
 	            
 	            final CharSequence[] items = {"Mark as Used", "Mark as Unused", "Delete", "Cancel"};
 
 	            AlertDialog.Builder builder = new AlertDialog.Builder(TransactionActivity.this);
-	            builder.setTitle("Make your selection");
+	            builder.setCancelable(true);
+	            builder.setTitle("transaction #"+transactionID.getText());
 	            builder.setItems(items, new DialogInterface.OnClickListener() {
 	                public void onClick(DialogInterface dialog, int item) {
 	                	if(item < 2 )
@@ -364,7 +358,7 @@ public class TransactionActivity extends Activity
         						map = new HashMap<String, String>();
         						map.put("ID", transaction.getString("id"));
         						map.put("Bank", transaction.getString("bank"));
-        				       	map.put("Amount", "ß" + transaction.getString("money"));
+        				       	map.put("Amount", "ß" + String.format("%.2f",transaction.getDouble("money")));
         				       	map.put("TransferDate", transaction.getString("created_at"));
         				       	if(transaction.getString("status").equals("0")){
         				       		//not paid
