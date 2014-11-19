@@ -73,6 +73,7 @@ function confirm_order($order_id, $money, $bank, $time)
     if (!isset($_COOKIE['attempt']))
     {
         setcookie("attempt", 0, time()+1000 );
+        $_COOKIE['attempt'] = 0;
     }
     if(isset($_COOKIE['attempt']) and $_COOKIE['attempt'] > 5)
     {
@@ -85,7 +86,7 @@ function confirm_order($order_id, $money, $bank, $time)
     $response = json_decode($response, true);
     if($response['success'] == 0)  // failed confirm
     {
-        setcookie("attempt", $_COOKIE['attempt'] + 1, time()+1000 );
+        $_COOKIE['attempt'] = $_COOKIE['attempt'] + 1;
         return false;
     }
     else //confirm success

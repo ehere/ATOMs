@@ -184,6 +184,89 @@ function transaction_process($sms_id)
 					return $response;
 				}
 			}
+			else if(strpos($message, "บเข้าบ") !== false)
+			{
+				$index = strpos ($message, "บเข้าบ");
+				$amount = '';
+				$index--;
+				while(is_numeric($message[$index]) or $message[$index] == '.')
+				{
+					$amount = $message[$index].$amount ;
+					$index--;
+				}
+				$account = explode('บเข้าบ/ช', $message);
+				$account = explode(' ', $account[1])[0];
+
+				$query = sprintf('SELECT count(*) FROM `sms_income` WHERE `message` = "%s"', $message);
+				$count = mysql_fetch_array(mysql_query($query));
+				$count = $count[0];
+
+				if($count == 1)
+				{
+					$temp = explode(" ", $message);
+
+					$process['sms_id'] 			= $row["id"];
+					$process['bank'] 			= array_search($row["sender"], $bank);
+					$process['time'] 			= $row["received_at"];
+					$process['sms_time'] 		= $row["received_at"];
+					$process['account_number'] 	= $account;
+					$process['channel']			= '';
+					$process['money'] 			= $amount;
+
+					// Validate Data
+					$valid = true;
+					if 	(!(	strpos($process['account_number'],"x") !== false and
+							(	strpos($process['account_number'],"0") !== false or
+								strpos($process['account_number'],"1") !== false or
+								strpos($process['account_number'],"2") !== false or
+								strpos($process['account_number'],"3") !== false or
+								strpos($process['account_number'],"4") !== false or
+								strpos($process['account_number'],"5") !== false or
+								strpos($process['account_number'],"6") !== false or
+								strpos($process['account_number'],"7") !== false or
+								strpos($process['account_number'],"8") !== false or
+								strpos($process['account_number'],"9") !== false
+							)
+						))
+					{
+						$valid = false;
+					}
+					if($process['time'] != date('Y-m-d H:i:s',strtotime($process['time'])))
+					{
+						$valid = false;
+					}
+					if(!is_numeric($process['money']))
+					{
+						$valid = false;
+					}
+					if($valid)
+					{
+						$query = sprintf('INSERT INTO `transaction`(`user_id`, `bank`, `sms_time`, `account_number`, `money`, `sms_id`, `channel`) VALUES ("%s","%s","%s","%s","%s", %d, "%s")', $row["user_id"], $process['bank'], $process['time'], $process['account_number'], $process['money'], $process['sms_id'], $process['channel']);
+						mysql_query($query);
+						$row = mysql_fetch_array(mysql_query('SELECT * FROM `transaction` WHERE `sms_id` = '.$process['sms_id']));
+						$response["success"] = 1;
+						$response["message"] = "Transaction Complete";
+						$response["bank"] = $process['bank'];
+						$response["transaction_id"] = $row['id'];
+						$response["time"] = $process['time'];
+						$response["money"] = $process['money'];
+						return $response;
+					}
+					else
+					{
+						$response["success"] = 0;
+						$response["message"] = "Invalid Transaction";
+						return $response;
+					}
+
+				}
+				else
+				{
+					$response["success"] = 0;
+					$response["message"] = "Duplicate Message";
+					return $response;
+				}
+			}
 			else
 			{
 				$response["success"] = 0;

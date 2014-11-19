@@ -203,27 +203,27 @@
                             </div>
                         </div>
                         <div class="media media-left feature">
-                            <a class="pull-right" href="#">
+                            <p class="pull-right" href="#">
                                 <i class="fa fa-credit-card fa-2x"></i>
-                            </a>
+                            </p>
                             <div class="media-body">
                                 <h3 class="media-heading">ระบบจัดการการแจ้งโอนเงินอัจฉริยะ</h3>
                                 จัดการการแจ้งโอนเงินของลูกค้าโดยอัตโนมัติ ว่ามียอดเงินโอนเข้าตามที่แจ้งมาจริงๆ หรือเปล่า
                             </div>
                         </div>
                         <div class="media media-left feature">
-                            <a class="pull-right" href="#">
+                            <p class="pull-right" href="#">
                                 <i class="fa fa-send fa-2x"></i>
-                            </a>
+                            </p>
                             <div class="media-body">
                                 <h3 class="media-heading">แจ้งจัดส่งสินค้ารวดเร็ว</h3>
                                 สามารถแจ้งการจัดส่งสินค้าให้กับลูกค้าได้อย่างรวดเร็ว พร้อมทั้งสามารถแจ้ง Tracking No. ให้กับลูกค้าได้ทันที
                             </div>
                         </div>
                         <div class="media media-left feature">
-                            <a class="pull-right" href="#">
+                            <p class="pull-right" href="#">
                                 <i class="fa fa-cogs fa-2x"></i>
-                            </a>
+                            </p>
                             <div class="media-body">
                                 <h3 class="media-heading">แก้ไขคำสั่งซื้อ</h3>
                                 คุณสามารถแก้ไขสถานะของคำสั่งซื้อได้อย่างง่ายดาย ไม่ว่าจะแจ้งโอนแล้ว จัดส่งแล้ว หรือแม้กระทั่งลบคำสั่งซื้อทิ้ง
@@ -235,36 +235,36 @@
                     </div>
                     <div class="col-md-4 col-sm-4 scrollpoint sp-effect2">
                         <div class="media feature">
-                            <a class="pull-left" href="#">
+                            <p class="pull-left" href="#">
                                 <i class="fa fa-database fa-2x"></i>
-                            </a>
+                            </p>
                             <div class="media-body">
                                 <h3 class="media-heading">มั่นใจได้ทุกสถานการณ์</h3>
                                 ไม่ต้องกลัวการขาดการเชื่อมต่ออินเตอร์เน็ต เพราะหลังจากคุณสามารถเชื่อมต่ออินเตอร์เน็ตได้ ระบบจะอัพเดตข้อมูลให้ทันที
                             </div>
                         </div>
                         <div class="media feature">
-                            <a class="pull-left" href="#">
+                            <p class="pull-left" href="#">
                                 <i class="fa fa-bank fa-2x"></i>
-                            </a>
+                            </p>
                             <div class="media-body">
                                 <h3 class="media-heading">รองรับหลากหลายธนาคาร</h3>
                                 รองรับการโอนเงินจากหลากหลายธนาคาร ไม่ว่าจะเป็น ไทยพาณิชย์, กสิกรไทย และอื่นๆ อีกมากมาย
                             </div>
                         </div>
                         <div class="media feature">
-                            <a class="pull-left" href="#">
+                            <p class="pull-left" href="#">
                                 <i class="fa fa-mobile fa-2x"></i>
-                            </a>
+                            </p>
                             <div class="media-body">
                                 <h3 class="media-heading">เข้าถึงคำสั่งซื้อ</h3>
                                 คุณสามารถเรียกดู และเข้าถึงทุกคำสั่งซื้อของคุณ รวมถึงทุกยอดเงินที่มีการเคลื่อนไหวได้ผ่านทางแอปพลิเคชัน
                             </div>
                         </div>
                         <div class="media feature">
-                            <a class="pull-left" href="#">
+                            <p class="pull-left" href="#">
                                 <i class="fa fa-users fa-2x"></i>
-                            </a>
+                            </p>
                             <div class="media-body">
                                 <h3 class="media-heading">ใช้งานง่าย</h3>
                                 แอปพลิเคชันถูกออกแบบมาให้ง่ายต่อการใช้งาน สามารถเข้าใจวิธีการใช้งานได้ในเวลาอันสั้น

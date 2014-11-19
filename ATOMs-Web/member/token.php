@@ -20,7 +20,7 @@
                                                 <h5 style="color: #FFFFFF">Click the button below to generate your API code, then you must edit some code to adapt to your site by follow the written instructions to get it works.</h5> 
                                                 <a href="template.php?template=api" target="_blank" class="btn btn-primary btn-lg btn-block">Generate API Code</a>
                                                 <hr />
-                                                <a href="?template=confirm" target="_blank" class="btn btn-primary btn-lg btn-block">Example Transfer Confirmation Form</a>
+                                                <a href="template.php?template=confirm" target="_blank" class="btn btn-primary btn-lg btn-block">Example Transfer Confirmation Form</a>
                                                 <hr />
                                             </div>
                                             <div class="row">

@@ -1,5 +1,5 @@
 <?php require_once("../functions.php"); ?>
-<?php 
+<?php
     if(!loggedin()){
         header("Location: login.php");
         die();
@@ -21,7 +21,7 @@
     <link rel="shortcut icon" href="favicon.png">
 
     <link rel="stylesheet" href="../css/bootstrap.css">
-    
+
     <link rel="stylesheet" href="../css/animate.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/slick.css">
@@ -36,7 +36,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+
 </head>
 
 <body style="background: linear-gradient(-45deg, #66cdcc 0%, #336799 100%) top right no-repeat !important; background-attachment:fixed !important; ">
@@ -51,9 +51,9 @@
             </div>
         </div>
     </div>
-   
+
     <header>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -70,8 +70,6 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="index.php">Home</a>
-                            </li>
                             <li><a href="profile.php">Your Profile</a>
                             </li>
                             <li><a href="token.php">Your Token</a>
@@ -87,7 +85,7 @@
                 <!-- /.container-->
         </nav>
     </header>
-        
+
         <!--RevSlider-->
 
         <style>
