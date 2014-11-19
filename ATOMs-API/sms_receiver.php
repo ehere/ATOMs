@@ -52,9 +52,17 @@ if ($result)
 	$process = transaction_process($row['id']);
 	if($process['success'] == 1)
 	{
-		$query 	= sprintf('UPDATE `order` SET `status`= 1 ,`transaction_id`= %d WHERE `user_id` = %d AND (`transfered_at` >= ("%s" - INTERVAL 1 MINUTE ) AND `transfered_at` <= ("%s" + INTERVAL 1 MINUTE ) AND ABS(%f-`money`) <= 0.00001 AND `status` = 0 AND transaction_id IS NULL AND `bank`= "%s") LIMIT 1', $process['transaction_id'], $user_id, $process['time'], $process['time'], $process['money'], $process['bank']);
-		mysql_query($query);
-		mysql_query('UPDATE `transaction` SET `status`=0 WHERE `id` = '.$process['transaction_id']);
+		$query 	= sprintf('SELECT * FROM `order` WHERE `user_id` = %d AND (`transfered_at` >= ("%s" - INTERVAL 1 MINUTE ) AND `transfered_at` <= ("%s" + INTERVAL 1 MINUTE ) AND ABS(%f-`money`) <= 0.00001 AND `status` = 0 AND transaction_id IS NULL AND `bank`= "%s") LIMIT 1', $user_id, $process['time'], $process['time'], $process['money'], $process['bank']);
+		$result = mysql_query($query);
+		if(mysql_num_rows($result) > 0)
+		{
+			$order = mysql_fetch_array($result);
+			$query 	= sprintf('UPDATE `order` SET `status`= 1 ,`transaction_id`= %d WHERE `id` = %d', $process['transaction_id'], $order['id']);
+			mysql_query($query);
+			mysql_query('UPDATE `transaction` SET `status`=1 WHERE `id` = '.$process['transaction_id']);
+
+		}
+
 	}
 }
 else
